@@ -2,4 +2,4 @@
 
 rajivharlalka.github.io .
 
-Personal Blog Bage using Zola SSG and a personal theme(WIP).
+Personal Blog Bage using Zola SSG and [Accio theme](https://github.com/rajivharlalka/Accio)
