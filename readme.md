@@ -1,4 +1,4 @@
-# Personal Blog Site Theme+Content
+# Personal Blog Site
 
 rajivharlalka.github.io .
 
