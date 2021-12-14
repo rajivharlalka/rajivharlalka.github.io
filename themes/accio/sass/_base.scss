@@ -19,10 +19,45 @@ body {
 }
 
 .main {
-
   margin: 0 1rem;
 }
-
+.blog-list {
+  .title {
+    display: grid;
+    place-items: center;
+    letter-spacing: 2px;
+    font-weight: bolder;
+    font-size: 3rem;
+    margin-bottom: 2em;
+  }
+  li {
+    list-style: none;
+    letter-spacing: 1px;
+    font-size: 2rem;
+    margin-bottom: 1.5em;
+  }
+  .page {
+    padding-left: 1.5em;
+  }
+  .heading {
+    display: flex;
+    align-items: center;
+    line-height: 1.3em;
+  }
+  i {
+    padding-right: 0.5em;
+    font-size: 1.4rem;
+    color: $text-color;
+  }
+  .desc {
+    font-size: 1.2rem;
+  }
+  .date {
+    padding-left: 2em;
+    font-size: 1rem;
+    opacity: 0.5;
+  }
+}
 @include max-screen() {
   body {
     border-top: 0;
@@ -36,4 +71,37 @@ body {
 a {
   color: $link-color;
   text-decoration: none;
+}
+
+.taxonomies{
+  text-align: center;
+  margin-bottom: 150px;
+}
+
+
+.taxonomies__title {
+  font-size: 2rem;
+  font-weight: bolder;
+  margin-bottom: 0.5em;
+}
+
+.count{
+  color: $text-color;
+  font-weight: 700;
+  font-size: 1.2rem;
+}
+.taxonomies__items {
+  padding-top: 11px;
+}
+
+.taxonomies_item{
+  background: rgba(230, 238, 236, 0.03);
+  border-radius: 5px;
+  // margin: 0 10px;
+  display: inline-block;
+  min-width: 100px;
+  margin: 1rem 1rem 0 0;
+  padding: 0.8rem 1.2rem;
+  font-size: 1.1rem;
+  word-spacing: 3px;
 }

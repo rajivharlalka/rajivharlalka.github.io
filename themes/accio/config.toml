@@ -1,11 +1,10 @@
 # The URL the site will be built for
-base_url = "https://rajivharlalka.github.io"
+base_url = "https://accio-demo.netlify.app"
 
-title = "Vijard"
-description = "Welcome to my world of leisure"
+title = "Accio"
+description = "A Spell Bound theme for Zola SSG"
 # Whether to automatically compile all Sass files in the sass directory
 compile_sass = true
-theme="accio"
 
 # Whether to build a search index to be used later on by a JavaScript library
 build_search_index = false
@@ -13,7 +12,6 @@ generate_feed=true
 
 taxonomies = [
     {name = "categories", rss = true},
-    
 ]
 [markdown]
 # Whether to do syntax highlighting
@@ -22,12 +20,23 @@ highlight_code = true
 render_emoji = true
 highlight_theme="material-dark"
 
+# Whether external links are to be opened in a new tab
+# If this is true, a `rel="noopener"` will always automatically be added for security reasons
+external_links_target_blank = true
+
+# Whether to set rel="nofollow" for all external links
+external_links_no_follow = true
+
+# Whether to set rel="noreferrer" for all external links
+external_links_no_referrer = true
+
 [extra]
 # Put all your custom variables here
-author= "Vijard"
+author= "Accio"
 blog_menu = [
     {url = "$BASE_URL", name = "Home"},
-    {url = "$BASE_URL/about", name = "About Me"},
     {url = "$BASE_URL/blog", name = "Posts"},
-    {url = "$BASE_URL/categories", name = "Categories"}
+    {url = "$BASE_URL/about", name = "About Me"},
+    {url = "$BASE_URL/categories", name = "Categories"},
+    {url = "$BASE_URL/Resume.pdf", name = "Resume"}
 ]
