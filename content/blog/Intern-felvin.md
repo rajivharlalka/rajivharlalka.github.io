@@ -21,7 +21,7 @@ Looking for code syntax, implemenations and snippets are the daily needs of any 
 There exists various open source project where algorithms in various languages have been compiled. Two of them were [Rosetta code](http://www.rosettacode.org/wiki/Rosetta_Code) and [The Algorithm](https://the-algorithms.com/). Their code snippets was kept in well maintained directory structure which I used to compile a single json using a js script. After the json was made , much of the task was done. A simple API service which took the query string and parsing the algorithm and language was enough to look for the specific code snippet. This code snippet was sent over over to the React app where the input was passed down to the [Monaco editor](https://github.com/suren-atoyan/monaco-react) component which rendered on the user's screen.
 
 Demo:
-![GIF](./intern.gif)
+![GIF](gif/intern.gif)
 
 ### The extra edge
 
