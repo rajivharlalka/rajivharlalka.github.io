@@ -19,10 +19,82 @@ body {
 }
 
 .main {
-
   margin: 0 1rem;
 }
 
+.about {
+  font-size: 1.6rem;
+  .post-title {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2em;
+  }
+  .post-content {
+    position: relative;
+    font-size: 0.8em;
+    line-height: 1.7em;
+    outline: 3px solid #64ffda;
+    padding: 1em 2em;
+    border-radius: 1em;
+  }
+  .emoji {
+    font-size: 1em;
+    position: absolute;
+    left: 7.5em;
+    top: 1.9em;
+    transform-origin: 60% 60%;
+    animation: wave 2s ease-in-out infinite;
+  }
+}
+@keyframes wave {
+  0% {
+    transform: rotate(20deg);
+  }
+  50% {
+    transform: rotate(50deg);
+  }
+  100% {
+    transform: rotate(20deg);
+  }
+}
+
+.blog-list {
+  .title {
+    display: grid;
+    place-items: center;
+    letter-spacing: 2px;
+    font-weight: bolder;
+    font-size: 3rem;
+    margin-bottom: 2em;
+  }
+  li {
+    list-style: none;
+    letter-spacing: 1px;
+    font-size: 2rem;
+    margin-bottom: 1.5em;
+  }
+  .page {
+    padding-left: 1.5em;
+  }
+  .heading {
+    display: flex;
+    align-items: center;
+    line-height: 1.3em;
+  }
+  i {
+    padding-right: 0.5em;
+    font-size: 1.4rem;
+    color: $text-color;
+  }
+  .desc {
+    font-size: 1.2rem;
+  }
+  .date {
+    padding-left: 2em;
+    font-size: 1rem;
+    opacity: 0.5;
+  }
+}
 @include max-screen() {
   body {
     border-top: 0;
@@ -31,9 +103,54 @@ body {
   .container {
     width: 100%;
   }
+  .about {
+    font-size: 1.2rem;
+    padding: 0 1em;
+    .post-content {
+      font-size: 0.7em;
+      line-height: 1.7em;
+      padding: 0.8em 1.3em;
+    }
+    .emoji {
+      left: 11ch;
+      top: 1.7em;
+    }
+  }
 }
 
 a {
   color: $link-color;
   text-decoration: none;
+}
+
+.taxonomies {
+  text-align: center;
+  margin-bottom: 150px;
+}
+
+.taxonomies__title {
+  font-size: 2rem;
+  font-weight: bolder;
+  margin-bottom: 0.5em;
+}
+
+.count {
+  color: $text-color;
+  font-weight: 700;
+  font-size: 1.2rem;
+}
+.taxonomies__items {
+  padding-top: 11px;
+}
+
+.taxonomies_item {
+  background: rgba(230, 238, 236, 0.03);
+  border-radius: 5px;
+  // margin: 0 10px;
+  display: inline-block;
+  min-width: 100px;
+  margin: 1rem 1rem 0 0;
+  padding: 0.8rem 1.2rem;
+  font-size: 1.1rem;
+  word-spacing: 3px;
 }
