@@ -10,7 +10,7 @@ categories = ["intern","felvin","tech"]
 
 Good search results are one of the most basic tasks that a search engine performs. Google is famous for this ability and hence is the **most** used search engine. But it is afterall the world of technology where things dont stay constant forever. As technology evolves , new and better alternatives emerge.
 
-[Felvin](https://felvin.com) is such of this kind. Being built on top of Google(as of now), Felvin aims to put a cherry on top of what Google provides. Providing a better search experience is what Felvin looks forward to.
+[Felvin](https://felvin.com) is such of this kind. Since Felvin consumes search data from different search engines, it provides a cherry on top what they provide. Providing a better search experience is what Felvin looks forward to.
 
 ## Topic of Work and Motivation behind it
 
