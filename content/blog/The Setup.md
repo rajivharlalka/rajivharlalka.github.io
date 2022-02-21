@@ -18,4 +18,3 @@ UPDATE: 10-1-2022
 
 - The work's still incomplete, though made some progress during the the month of December. 
 - Seems procastination to work on the theme has started again, and would revive this as ITS IMPORTANT. I wish to setup to switch to a personal domain from a .github.io one , once the theme is complete(can't say perfect, as it wont be ever) .
-- 
