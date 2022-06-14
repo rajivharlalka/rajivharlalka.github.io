@@ -2,7 +2,7 @@
 base_url = "https://rajivharlalka.me"
 
 title = "Rajiv"
-description = "Welcome to my world of leisure"
+description = "Minimalism | Pensive | Tennis"
 # Whether to automatically compile all Sass files in the sass directory
 compile_sass = true
 theme="accio"
