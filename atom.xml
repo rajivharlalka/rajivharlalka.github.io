@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+	<title>Rajiv</title>
+	<subtitle>Minimalism | Pensive | Tennis</subtitle>
+	<link href="https://rajivharlalka.me/atom.xml" rel="self" type="application/atom+xml"/>
+  <link href="https://rajivharlalka.me"/>
+	<generator uri="https://www.getzola.org/">Zola</generator>
+	<updated>2022-06-14T00:00:00+00:00</updated>
+	<id>https://rajivharlalka.me/atom.xml</id>
+	<entry xml:lang="en">
+		<title>Bi-Weekly Music Post Part 1&#x2F;n</title>
+		<published>2022-06-14T00:00:00+00:00</published>
+		<updated>2022-06-14T00:00:00+00:00</updated>
+		<link href="https://rajivharlalka.me/blog/music-blog-1/" type="text/html"/>
+		<id>https://rajivharlalka.me/blog/music-blog-1/</id>
+		<content type="html">&lt;p&gt;Have recently started with trying different sorts of music, so each part of this post series would probably have a different flavour of music. Trying things out to find what suits me the most.&lt;&#x2F;p&gt;
+&lt;p&gt;This post contains mostly the under-rated Indie songs on which I can chime all day. Looks there is no going back atleast from these master pieces.&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;aakhon-se-batana&quot;&gt;Aakhon se Batana&lt;&#x2F;h1&gt;
+&lt;iframe style=&quot;border-radius:12px;align:left&quot; src=&quot;https:&#x2F;&#x2F;open.spotify.com&#x2F;embed&#x2F;track&#x2F;1ZiReD9pPTttQWwSoYqdyH?utm_source=generator&quot; width=&quot;50%&quot; height=&quot;380&quot; frameBorder=&quot;0&quot; allowfullscreen=&quot;&quot; allow=&quot;autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture&quot;&gt;&lt;&#x2F;iframe&gt;
+&lt;h1 id=&quot;kehna-galat-galat&quot;&gt;Kehna Galat Galat&lt;&#x2F;h1&gt;
+&lt;iframe style=&quot;border-radius:12px;align:right&quot; src=&quot;https:&#x2F;&#x2F;open.spotify.com&#x2F;embed&#x2F;track&#x2F;4tMwHkxBwnGkts9mxFpwQy?utm_source=generator&quot; width=&quot;50%&quot; height=&quot;380&quot; frameBorder=&quot;0&quot; allowfullscreen=&quot;&quot; allow=&quot;autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture&quot;&gt;&lt;&#x2F;iframe&gt;
+&lt;h1 id=&quot;choo-lo&quot;&gt;Choo Lo&lt;&#x2F;h1&gt;
+&lt;iframe style=&quot;border-radius:12px&quot; src=&quot;https:&#x2F;&#x2F;open.spotify.com&#x2F;embed&#x2F;track&#x2F;2qgXrzJsry4KgYoJCpuaul?utm_source=generator&quot; width=&quot;50%&quot; height=&quot;380&quot; frameBorder=&quot;0&quot; allowfullscreen=&quot;&quot; allow=&quot;autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture&quot;&gt;&lt;&#x2F;iframe&gt;
+&lt;h1 id=&quot;rangi-saari&quot;&gt;Rangi Saari&lt;&#x2F;h1&gt;
+&lt;iframe style=&quot;border-radius:12px&quot; src=&quot;https:&#x2F;&#x2F;open.spotify.com&#x2F;embed&#x2F;track&#x2F;3F2BSn4ayglzMwquBRHZq6?utm_source=generator&quot; width=&quot;50%&quot; height=&quot;380&quot; frameBorder=&quot;0&quot; allowfullscreen=&quot;&quot; allow=&quot;autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture&quot;&gt;&lt;&#x2F;iframe&gt;
+&lt;h1 id=&quot;kaagaz-ki-naav&quot;&gt;Kaagaz ki Naav&lt;&#x2F;h1&gt;
+&lt;iframe style=&quot;border-radius:12px&quot; src=&quot;https:&#x2F;&#x2F;open.spotify.com&#x2F;embed&#x2F;track&#x2F;0VsdGpccIWa7h8sYZmaO0G?utm_source=generator&quot; width=&quot;50%&quot; height=&quot;380&quot; frameBorder=&quot;0&quot; allowfullscreen=&quot;&quot; allow=&quot;autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture&quot;&gt;&lt;&#x2F;iframe&gt;
+&lt;p&gt;Peace!&lt;&#x2F;p&gt;
+</content>
+	</entry>
+	<entry xml:lang="en">
+		<title>Being all in one</title>
+		<published>2022-01-11T00:00:00+00:00</published>
+		<updated>2022-01-11T00:00:00+00:00</updated>
+		<link href="https://rajivharlalka.me/blog/kwoc-2021/" type="text/html"/>
+		<id>https://rajivharlalka.me/blog/kwoc-2021/</id>
+		<content type="html">&lt;p&gt;How does it feel to be a mentor, student and a developer of the platform all at once. I would like to tell how I felt it. Kyool !!&lt;&#x2F;p&gt;
+&lt;img width=&quot;100%&quot; src=&quot;.&#x2F;image.png&quot;&#x2F;&gt;
+&lt;h2 id=&quot;background&quot;&gt;&lt;u&gt;Background&lt;&#x2F;u&gt;&lt;&#x2F;h2&gt;
+&lt;p&gt;Every winter, &lt;a href=&quot;https:&#x2F;&#x2F;kossiitkgp.org&#x2F;&quot;&gt;Kharagpur Open Source Society&lt;&#x2F;a&gt; organises a month long coding program &lt;a href=&quot;https:&#x2F;&#x2F;kwoc.kossiitkgp.org&quot;&gt;KWoC&lt;&#x2F;a&gt;. The aim of the program is to give a experience of how events such as GSoC are held and promote Open Source Contributions. Mentors having different project are given a platform to upload their idea and students all around the world are eligible to register for the event. After successful completion of the program, the students are provided with a certificate.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;from-a-developer-s-pov&quot;&gt;&lt;u&gt;From a Developer&#x27;s POV&lt;&#x2F;u&gt;&lt;&#x2F;h2&gt;
+&lt;p&gt;As a member of the society , I was one of the person helping organize the event. I took up the work of adding features and making changes required to the backend repository , that being my field of interest. Though I worked with javascript all this time, picking up a golang backend was kinda not in line of my daily work. But going out of mainstream work is what I crave for. So yes, I went on to grab the opportunity.&lt;&#x2F;p&gt;
+&lt;p&gt;Learnt golang from scratch , wrote some basic programs to get accustomed to the langugae and went on to understand the already written codebase. The backend used mux as a http request handler,gorm as an postgres ORM and a &lt;a href=&quot;https:&#x2F;&#x2F;supabase.io&#x2F;&quot;&gt;supabase&lt;&#x2F;a&gt; postgres instance as a database.Thanks to the well written code a the comments of the previous dev, understanding that wasnt much pain in the ass .&lt;&#x2F;p&gt;
+&lt;p&gt;In a span of next 15 days, I designed some new api endpoints and updated some old. Add foreign keys to the database(❤️) table which were missing last year . Got to know something new called &lt;a href=&quot;https:&#x2F;&#x2F;gorm.io&#x2F;docs&#x2F;preload.html&quot;&gt;Eager Loading&lt;&#x2F;a&gt;. Also had my first experience setting up nginx and deploying the backend binary to an AWS EC2 server.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;from-a-mentor-s-pov&quot;&gt;&lt;u&gt;From a Mentor&#x27;s POV&lt;&#x2F;u&gt;&lt;&#x2F;h2&gt;
+&lt;p&gt;Our platform was ready just in time and we were ready to go. To test out all our platform&#x27;s functionality, I added one of my project , &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;rajivharlalka&#x2F;accio&quot;&gt;Accio&lt;&#x2F;a&gt; as a project . Yes , you saw it correct, it&#x27;s the same theme that powers this blog. I was already a lot behind my schedule in setting up this blog and saw this as a opportunity to get my work fastened. What started as a joke ended up me mentoring a project.&lt;&#x2F;p&gt;
+&lt;p&gt;I took my companion &lt;a href=&quot;https:&#x2F;&#x2F;chiragghosh.me&quot;&gt;Chirag&lt;&#x2F;a&gt; as my co-mentor as he was the one helping me on the project as well. We made our discord server for communicating with the mentee&#x27;s . To my surprise , my project had gathered a lot of attention. Being an Open Source mainter is tough, felt this during the time. Had an idea of talking to contributors while one my seniors &lt;a href=&quot;https:&#x2F;&#x2F;sahil-shubham.in&quot;&gt;Sahil&lt;&#x2F;a&gt; mentored me in some of the projects. Was able to solve mentee&#x27;s issues and tried to do good code review. Hoping the mentee&#x27;s had a great time contributing to my project too.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;from-a-student-s-pov&quot;&gt;&lt;u&gt;From a Student&#x27;s POV&lt;&#x2F;u&gt;&lt;&#x2F;h2&gt;
+&lt;p&gt;Along with working on my project(Accio), I was also actively contributing to another project , &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;felvin-search&#x2F;instant-apps&quot;&gt;Instant-Apps&lt;&#x2F;a&gt; by &lt;a href=&quot;https:&#x2F;&#x2F;felvin.com&quot;&gt;Felvin&lt;&#x2F;a&gt; . Havent you popped up with some fancy tool apps by Google for some specific search queries. Felvin aims to make them accessible to the most basic tasks. Users wont have to crawl different pages to get their work done when everything can be done by the search engine itself. &lt;&#x2F;p&gt;
+&lt;p&gt;This project taught me so much , I cant even think to jot it down. From understanding how to use git and github the right way to going to making React apps, styled components (somethng which I would never thought of using) , it has been a long way. Special credits to &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;sahil-shubham&quot;&gt;Sahil Shubham&lt;&#x2F;a&gt; for responding to my most useless queries :simple_smile: &lt;&#x2F;p&gt;
+&lt;p&gt;Oh, you reached the end of my shitty story. Congrats on that 🎉 . Would come again with some another shitty story, some another shitty day . Till then See Ya!&lt;&#x2F;p&gt;
+</content>
+	</entry>
+	<entry xml:lang="en">
+		<title>Spending Winter in an ideal Way</title>
+		<published>2022-01-10T00:00:00+00:00</published>
+		<updated>2022-01-10T00:00:00+00:00</updated>
+		<link href="https://rajivharlalka.me/blog/felvin-intern/" type="text/html"/>
+		<id>https://rajivharlalka.me/blog/felvin-intern/</id>
+		<content type="html">&lt;p&gt;Good search results are one of the most basic tasks that a search engine performs. Google is famous for this ability and hence is the &lt;strong&gt;most&lt;&#x2F;strong&gt; used search engine. But it is afterall the world of technology where things dont stay constant forever. As technology evolves , new and better alternatives emerge.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;felvin.com&quot;&gt;Felvin&lt;&#x2F;a&gt; is such of this kind. Since Felvin consumes search data from different search engines, it provides a cherry on top what they provide. Providing a better search experience is what Felvin looks forward to . &lt;&#x2F;p&gt;
+&lt;h2 id=&quot;topic-of-work-and-motivation-behind-it&quot;&gt;Topic of Work and Motivation behind it&lt;&#x2F;h2&gt;
+&lt;p&gt;Looking for code syntax, implemenations and snippets are the daily needs of any developer. This becomes a lot tedious a lot when this simple task requires the user to jump between sites to find relevant data. Making an instant app for &lt;code&gt;Reference Implementation of Code Snippets&lt;&#x2F;code&gt; was the topic that I took up as my project.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;implementation-of-my-work&quot;&gt;Implementation of my work&lt;&#x2F;h2&gt;
+&lt;p&gt;There exists various open source project where algorithms in various languages have been compiled. Two of them were &lt;a href=&quot;http:&#x2F;&#x2F;www.rosettacode.org&#x2F;wiki&#x2F;Rosetta_Code&quot;&gt;Rosetta code&lt;&#x2F;a&gt; and &lt;a href=&quot;https:&#x2F;&#x2F;the-algorithms.com&#x2F;&quot;&gt;The Algorithm&lt;&#x2F;a&gt;. Their code snippets was kept in well maintained directory structure which I used to compile a single json using a js script. After the json was made , much of the task was done.&lt;&#x2F;p&gt;
+&lt;p&gt;A simple API service which took the query string and parsing the algorithm and language was enough to look for the specific code snippet. This code snippet was sent over over to the React app(or &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;felvin-search&#x2F;instant-apps&quot;&gt;instant app&lt;&#x2F;a&gt; in Felvin&#x27;s terminology) where the input was passed down to the &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;suren-atoyan&#x2F;monaco-react&quot;&gt;Monaco editor&lt;&#x2F;a&gt; component which rendered on the user&#x27;s screen. The main benefit of using the Monaco Editor rather than custom styling a textbox was the inbuilt vscode feature it provides, Code Suggestions &lt;&#x2F;p&gt;
+&lt;p&gt;Demo:&lt;&#x2F;p&gt;
+&lt;p&gt;Sample Query :&lt;a href=&quot;https:&#x2F;&#x2F;sandbox.felvin.com&#x2F;search?q=breadth%20first%20search%20in%20javascript&quot;&gt;here&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;img width=&quot;100%&quot; src=&quot;.&#x2F;intern.gif&quot;&#x2F;&gt;
+&lt;p&gt;In short , I spend my winter learning , breaking stuff and building connections with new people around. Thanks to &lt;a href=&quot;https:&#x2F;&#x2F;hargup.in&#x2F;&quot;&gt;Harsh&lt;&#x2F;a&gt; for providing this opportunity and being a great mentor along the way and &lt;a href=&quot;https:&#x2F;&#x2F;sahil-shubham.in&#x2F;&quot;&gt;Sahil&lt;&#x2F;a&gt; for the consistent much-needed help during the whole time.&lt;&#x2F;p&gt;
+</content>
+	</entry>
+	<entry xml:lang="en">
+		<title>The Setup</title>
+		<published>2021-10-25T00:00:00+00:00</published>
+		<updated>2021-10-25T00:00:00+00:00</updated>
+		<link href="https://rajivharlalka.me/blog/the-setup/" type="text/html"/>
+		<id>https://rajivharlalka.me/blog/the-setup/</id>
+		<content type="html">&lt;p&gt;&lt;code&gt;Rome wasnt built in a day,neither will this be&lt;&#x2F;code&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;After getting fed up of my very colorful &lt;code&gt;template&lt;&#x2F;code&gt; React page, and procastinating for more than 2 months on building a blog page , today is when I finally start it.
+&lt;br&gt;
+Thought of making a theme of own,something minimilist, from scratch as it would be a great learning experience with &lt;code&gt;sass&lt;&#x2F;code&gt; , ssg&#x27;s and templating library.
+Since this is going to take long, So a request 🙏 to reader , do visit the page frequently as you might see great some changes.Using a refernce of many blogs which I admire (would reference them in future),and probably would take a lot of help along the way, and hoping to make this something great.&lt;&#x2F;p&gt;
+&lt;p&gt;UPDATE: 10-1-2022&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;The work&#x27;s still incomplete, though made some progress during the the month of December. &lt;&#x2F;li&gt;
+&lt;li&gt;Seems procastination to work on the theme has started again, and would revive this as ITS IMPORTANT. I wish to setup to switch to a personal domain from a .github.io one , once the theme is complete(can&#x27;t say perfect, as it wont be ever) .&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+</content>
+	</entry>
+</feed>
