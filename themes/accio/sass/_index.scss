@@ -1,77 +1,66 @@
-footer {
-  color: $secondary_color;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 1rem 0;
-  font-size: 1.1rem;
-  line-height: 1.5rem;
+html {
+  box-sizing: border-box;
+  font-size: 16px;
+}
 
-  .social {
+body {
+  color: $blog-color;
+  background-color: $background_color;
+  font-family: $blog-font;
+  min-height: 100vh;
+  .container {
+    width: 100%;
+    min-height: 100vh;
     display: flex;
-    align-items: center;
-    a {
-      margin-right: 1rem;
-      display: flex;
-      align-items: center;
-    }
-  }
-
-  p {
-    margin: 0;
-  }
-  .footer_info {
-    display: flex;
-    justify-content: space-between;
-
-    a {
-      transition: all 0.4s;
-      &:hover {
-        color: $link-highlighted-color;
-      }
-    }
-  }
-  @include sm {
     flex-direction: column;
+    justify-content: space-between
+  }
+  .content {
+    padding: 10px;
+    flex-grow: 1;
+    margin-bottom: 4rem;
+  }
+
+  @include for-tablet-landscape-up{
+    max-width: 800px;
+    margin: { 
+      left:auto;
+      right:auto;
+    }
+
+    .content {
+      margin-bottom: 0;
+    }
   }
 }
 
-.nav-desktop {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  min-height: 5rem;
-  font-size: 1.2rem;
 
-  @include sm {
-    display: none;
+
+footer {
+  display: none;
+  text-align: center;
+  opacity: 0.75;
+  margin: 10px;
+  padding: 10px;
+
+  @include for-tablet-landscape-up{
+    display: block;
   }
 }
 
-.nav-item-desktop {
-  transition: all 0.3s;
-  border-radius: 50%;
-  letter-spacing: 1px;
-
-  &:hover {
-    color: $link-highlighted-color;
-  }
+a {
+  color: $secondary_color;
+  text-decoration: none;
 }
 
-.index-heading {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
-  .index-title {
-    font-size: 2.8rem;
-    letter-spacing: 2px;
-    color: $link-color;
-  }
-
-  .index-subtitle {
-    font-size: 1.2rem;
-  }
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background-color: rgba(155, 155, 155, 0.5);
+  border-radius: 10px;
+  border: transparent;
 }
