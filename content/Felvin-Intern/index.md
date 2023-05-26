@@ -5,7 +5,7 @@ date = 2022-01-10
 draft=false
 
 [taxonomies]
-categories = ["intern","felvin","tech"]
+categories = ["intern","tech"]
 +++
 
 Good search results are one of the most basic tasks that a search engine performs. Google is famous for this ability and hence is the **most** used search engine. But it is afterall the world of technology where things dont stay constant forever. As technology evolves , new and better alternatives emerge.

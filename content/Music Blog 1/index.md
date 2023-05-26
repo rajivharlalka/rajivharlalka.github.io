@@ -5,7 +5,7 @@ date = 2022-06-14
 draft=false
 
 [taxonomies]
-categories = ["music"]
+categories = ["music","non-tech"]
 +++
 
 Have recently started with trying different sorts of music, so each part of this post series would probably have a different flavour of music. Trying things out to find what suits me the most.

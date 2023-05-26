@@ -5,7 +5,7 @@ date = 2022-01-11
 draft=false
 
 [taxonomies]
-categories = ["kwoc","learning","mentor","student","non-tech"]
+categories = ["kwoc","mentor","student","non-tech"]
 +++
 
 How does it feel to be a mentor, student and a developer of the platform all at once. I would like to tell how I felt it. Kyool !!

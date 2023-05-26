@@ -4,7 +4,7 @@ description = "My blog setup journey"
 date = 2021-10-25
 
 [taxonomies]
-categories = ["setup"]
+categories = ["setup","tech"]
 +++
 
 `Rome wasnt built in a day,neither will this be`
