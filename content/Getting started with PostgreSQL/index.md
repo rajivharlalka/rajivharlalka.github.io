@@ -1,5 +1,5 @@
 +++
-title = "Getting started with PostgreSQL"
+title = "Getting started with GSoC@PostgreSQL"
 description = "First Bi-weekly post on my work during GSoC "
 date = 2023-06-08
 draft=false
