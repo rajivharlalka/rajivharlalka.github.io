@@ -2,13 +2,13 @@
 base_url = "https://rajivharlalka.tech"
 
 title = "Rajiv"
-description = "Student intereted in FOSS and Backend"
+description = "Tech Lover with a smile"
 # Whether to automatically compile all Sass files in the sass directory
 compile_sass = true
 theme="accio"
 
 # Whether to build a search index to be used later on by a JavaScript library
-build_search_index = false
+build_search_index = true
 generate_feed=true
 
 taxonomies = [
@@ -36,3 +36,7 @@ blog_menu = [
     {url="$BASE_URL/Resume.pdf",name="Resume"}
 ]
 GITHUB_USERNAME="rajivharlalka"
+
+[extra.utterance]
+repo = "rajivharlalka/rajivharlalka.github.io"
+theme= "photon-dark"
