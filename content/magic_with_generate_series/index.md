@@ -153,6 +153,7 @@ This works in a way that it generates a random_value and for each such value che
 The start and end are weights but extended from 100 to higher powers for more granular control.
 
 To test this I performed a test to check the percentage of each value generated and here is the result:
+
 | id |float8 |
 |--|---|
 |1 | 0.750275|
@@ -162,7 +163,7 @@ To test this I performed a test to check the percentage of each value generated 
 |5 |0.019834|
 
 
-Can try it out yourself at https://dbfiddle.uk/3yBKJYFz.
+Can try it out yourself at [https://dbfiddle.uk/3yBKJYFz](https://dbfiddle.uk/3yBKJYFz).
 
 I also found another way of doing this after celebrating my joy of writing this function. It was a [ blogpost by Depesz](https://www.depesz.com/2022/11/30/picking-random-element-with-weights/) which uses a for loop to find random values in the range. Clever.
 
