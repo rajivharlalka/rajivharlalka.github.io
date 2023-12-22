@@ -32,7 +32,7 @@ author= "Rajiv"
 blog_menu = [
     {url = "$BASE_URL/about", name = "About Me"},
     {url = "$BASE_URL/categories", name = "Categories"},
-    {url = "https://notes.rajivharlalka.tech", name = "Notes"},
+    {url = "https://notes.rajivharlalka.in", name = "Notes"},
     {url="$BASE_URL/Resume.pdf",name="Resume"}
 ]
 GITHUB_USERNAME="rajivharlalka"

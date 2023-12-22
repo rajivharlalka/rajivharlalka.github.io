@@ -11,7 +11,7 @@ categories = ["gsoc","postgresql","tech","student","open-source"]
 
 This post is about my journey from reading about DBMS and Relational databases to actually getting to work on them. Recently Google Open Source Team released the GSoC'23 results and I am glad to be selected to contribute for the prestigious [PostgreSQL](https://postgresql.org) org. 
 
-My journey with the love of databases all started from when [Shubham Mishra](https://grapheo12.in), my college senior, gave me the task of presenting a [15-min talk on Database Management System](https://slides.rajivharlalka.tech/DBMS/index.html) as a part of [KOSS](https://kossiitkgp.org) interview process. That 1 week of learning made me inspire to what I would get to do for the next few months.
+My journey with the love of databases all started from when [Shubham Mishra](https://grapheo12.in), my college senior, gave me the task of presenting a [15-min talk on Database Management System](https://slides.rajivharlalka.in/DBMS/index.html) as a part of [KOSS](https://kossiitkgp.org) interview process. That 1 week of learning made me inspire to what I would get to do for the next few months.
 
 ## The start of all of it
 
