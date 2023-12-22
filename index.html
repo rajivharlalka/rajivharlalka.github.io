@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <meta name="viewport" content="width=900, initial-scale=1.0">
+  <title>Redirect to new Site</title>
+</head>
+<body class="font-mono bg-zinc-200 border-box flex h-screen items-center">
+  <div class="container mx-auto border-2 border-rose-500 w-3/5 bg-white">
+      <p class="text-center p-1 lg:text-4xl md:text-2xl"> Hold on! Redirecting to new website </p>
+      <p class="text-center p-1 lg:text-xl md:text-md">If not redirected in 5 sec, <a class="text-yellow-800" href="https://rajivharlalka.in">click here</a> ! </p>
+  </div>
+</body>
+<script>
+  setTimeout(()=>
+  window.location.replace("http://rajivharlalka.in"),5000);
+</script>
+</html>
