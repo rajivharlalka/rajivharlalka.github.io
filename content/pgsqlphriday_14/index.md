@@ -5,7 +5,7 @@ date = 2023-12-02
 draft=false
 
 [taxonomies]
-categories = ["postgresql","tech","open-source","Conference"]
+categories = ["postgresql","tech","open-source","conference"]
 +++
 ![PostgreSQL slonik with friends of same size sitting on a chair on a table](img.png)
 
