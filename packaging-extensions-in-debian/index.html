@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta content="IE=edge" http-equiv="X-UA-Compatible" />
+    <meta content="text/html; charset=utf-8" http-equiv="content-type" />
+    <!-- Enable responsiveness on mobile devices-->
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+    
+    <link rel="alternate" type= "application/atom+xml"  title="RSS" href="https://rajivharlalka.in/atom.xml" /> 
+
+    <title>
+      
+    Rajiv - Packaging PostgreSQL extensions in Debian&#x2F;Ubuntu Systems
+
+    </title>
+
+    <link href="https://rajivharlalka.in/site.css" rel="stylesheet" />
+    
+    <meta content="website" property="og:type"/>
+    <meta content="Rajiv" property="og:site_name"/>
+    <meta content="https://rajivharlalka.in/packaging-extensions-in-debian/" property="og:url"/>
+    <meta content="https://rajivharlalka.in/packaging-extensions-in-debian/" property="twitter:url"/>
+    
+        <meta content="Packaging PostgreSQL extensions in Debian&#x2F;Ubuntu Systems" property="og:title"/>
+        <meta content="Packaging PostgreSQL extensions in Debian&#x2F;Ubuntu Systems" property="twitter:title"/>
+    
+    
+        <meta content="A simple writeup to remeber how to package a pg extension on Debain&#x2F;Ubuntu Linux" property="description"/>
+        <meta content="A simple writeup to remeber how to package a pg extension on Debain&#x2F;Ubuntu Linux" property="og:description"/>
+        <meta content="A simple writeup to remeber how to package a pg extension on Debain&#x2F;Ubuntu Linux" property="twitter:description"/>
+    
+    
+        <meta content="summary_large_image" property="twitter:card"/>
+        <meta content="https://rajivharlalka.in/images/cover.png" property="og:image"/>
+        <meta content="https://rajivharlalka.in/images/cover.png" property="twitter:image"/>
+    
+
+    
+    
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="keywords" content="blog,rajivharlalka,website, tech, learning" />
+    <script async defer data-website-id="9b871309-d397-4b82-840a-9ad23c34a546" src="https://um.rajivharlalka.in/umami.js"></script>
+  </head>
+
+  <body>
+    <div class="container">
+
+      
+<header>
+  <nav class="navbar">
+    <div class="navbar-left">
+      <a href="https://rajivharlalka.in" class="navbar-title">
+          Rajiv
+      </a>
+    </div>
+
+
+    <div class="navbar-right">
+      <ul class="navbar-nav">
+        
+        <li class="nav-item nav-link">
+           <a href="https:&#x2F;&#x2F;rajivharlalka.in&#x2F;about" class="navbar-item">
+            About Me
+          </a>
+        </li>
+        
+        <li class="nav-item nav-link">
+           <a href="https:&#x2F;&#x2F;rajivharlalka.in&#x2F;categories" class="navbar-item">
+            Categories
+          </a>
+        </li>
+        
+        <li class="nav-item nav-link">
+           <a href="https:&#x2F;&#x2F;notes.rajivharlalka.in" class="navbar-item">
+            Notes
+          </a>
+        </li>
+        
+        <li class="nav-item nav-link">
+           <a href="https:&#x2F;&#x2F;rajivharlalka.in&#x2F;Resume.pdf" class="navbar-item">
+            Resume
+          </a>
+        </li>
+        
+      </ul>
+    </div>
+  </nav>
+</header>
+
+
+        <div class="content">
+          
+<article class="blog-page">
+  <div class="header">
+    <div class="meta">
+      
+      <div class="date">2023-07-01</div>
+      
+
+      
+      <div class="tags">
+        
+        <a href="https://rajivharlalka.in/categories/postgresql/" class="tag">
+          postgresql
+        </a>
+        
+        <a href="https://rajivharlalka.in/categories/tech/" class="tag">
+          tech
+        </a>
+        
+        <a href="https://rajivharlalka.in/categories/open-source/" class="tag">
+          open-source
+        </a>
+        
+        <a href="https://rajivharlalka.in/categories/linux/" class="tag">
+          Linux
+        </a>
+        
+      </div>
+      
+    </div>
+    <div class="title">Packaging PostgreSQL extensions in Debian&#x2F;Ubuntu Systems</div>
+    <div class="description">A simple writeup to remeber how to package a pg extension on Debain&#x2F;Ubuntu Linux</div>
+  </div>
+  <div class="content"><p><img src="https://rajivharlalka.in/packaging-extensions-in-debian/art.jpeg" alt="art" />
+Hi everyone,</p>
+<p><a rel="noopener nofollow noreferrer" target="_blank" href="https://postgresql.org">PostgreSQL</a> has a great extensibility in features using extensions. Any feature that a user needs which isnt there natively can be added using extensions. to distribute extensions on different systems, packaging becomes important.</p>
+<p>This blog lists down the steps to package a PostgreSQL extension in debian/ubuntu systems. I would be packaging a simple <a rel="noopener nofollow noreferrer" target="_blank" href="https://github.com/rajivharlalka/pg_extensions">base36</a> extension to list down the steps.</p>
+<h3 id="1-adding-the-sources-list">1. Adding the sources list</h3>
+<p>To install postgresql packages in debian, the <code>apt.postgresql.org</code> apt list needs to be added. </p>
+<pre data-lang="bash" style="background-color:#212121;color:#eeffff;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="font-style:italic;color:#4a4a4a;"># Reference: https://wiki.postgresql.org/wiki/Apt
+</span><span style="font-style:italic;color:#4a4a4a;"># Add gpg keys for verification
+</span><span style="color:#82aaff;">curl https://www.postgresql.org/media/keys/ACCC4CF8.asc </span><span style="color:#89ddff;">| </span><span style="color:#82aaff;">gpg</span><span style="color:#89ddff;"> --</span><span style="color:#f78c6c;">dearmor </span><span style="color:#89ddff;">| </span><span style="color:#82aaff;">sudo tee /etc/apt/trusted.gpg.d/apt.postgresql.org.gpg </span><span style="color:#89ddff;">&gt;</span><span style="color:#82aaff;">/dev/nul
+</span><span style="font-style:italic;color:#4a4a4a;">#For downloading packages
+</span><span style="color:#82aaff;">sudo echo </span><span style="color:#89ddff;">&quot;</span><span style="color:#c3e88d;">deb http://apt.postgresql.org/pub/repos/apt </span><span style="color:#89ddff;">$(</span><span style="color:#82aaff;">lsb_release</span><span style="color:#89ddff;"> -</span><span style="color:#f78c6c;">cs</span><span style="color:#89ddff;">)</span><span style="color:#c3e88d;">-pgdg main</span><span style="color:#89ddff;">&quot; &gt;</span><span style="color:#82aaff;"> /etc/apt/sources.list.d/pgdg.list
+</span><span style="font-style:italic;color:#4a4a4a;">#To also be able to download source files of packages deb-src also needs to be added
+</span><span style="color:#82aaff;">sudo echo </span><span style="color:#89ddff;">&quot;</span><span style="color:#c3e88d;">deb-src http://apt.postgresql.org/pub/repos/apt </span><span style="color:#89ddff;">$(</span><span style="color:#82aaff;">lsb_release</span><span style="color:#89ddff;"> -</span><span style="color:#f78c6c;">cs</span><span style="color:#89ddff;">)</span><span style="color:#c3e88d;">-pgdg main</span><span style="color:#89ddff;">&quot; &gt;&gt;</span><span style="color:#82aaff;"> /etc/apt/sources.list.d/pgdg.list
+</span></code></pre>
+<p>Run <code>apt install</code> to update the apt list repositry and be able to search for packages using apt command.</p>
+<h3 id="2-setting-up-the-directory">2. Setting up the directory</h3>
+<p>Get your extension source code in a directory. Next from the root of the extension directory, call <a rel="noopener nofollow noreferrer" target="_blank" href="https://manpages.debian.org/bullseye/postgresql-server-dev-all/dh_make_pgxs.1.en.html"><code>dh_make_pgxs</code></a> to setup the boilerplate for the debian folder. </p>
+<pre data-lang="bash" style="background-color:#212121;color:#eeffff;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#82aaff;">vagrant@ubuntu-focal:/vagrant/base36-0.0.1$ dh_make_pgxs
+</span><span style="color:#82aaff;">Upstream (-n</span><span>)</span><span style="color:#82aaff;">: base36
+</span><span style="color:#82aaff;">Version (-v</span><span>)</span><span style="color:#82aaff;">:  0.0.1
+</span><span style="color:#82aaff;">Source:        base36 (0.0.1-1</span><span>)
+</span><span style="color:#82aaff;">Binaries:      postgresql-PGVERSION-base36 (0.0.1-1</span><span>)
+</span><span style="color:#82aaff;">Uploader:       </span><span style="color:#89ddff;">&lt;</span><span style="color:#82aaff;">vagrant@localhost</span><span style="color:#89ddff;">&gt;
+</span><span style="color:#82aaff;">Homepage (-h</span><span>)</span><span style="color:#82aaff;">: https://FIXME/base36
+</span><span>
+</span><span style="color:#82aaff;">Press Enter to continue, ^C to abort
+</span><span style="color:#82aaff;">Installing debian/control.in
+</span><span style="color:#82aaff;">Installing debian/copyright
+</span><span style="color:#82aaff;">Installing debian/gitlab-ci.yml
+</span><span style="color:#82aaff;">Installing debian/pgversions
+</span><span style="color:#82aaff;">Installing debian/rules
+</span><span style="color:#82aaff;">Creating debian/source/
+</span><span style="color:#82aaff;">Installing debian/source/format
+</span><span style="color:#82aaff;">Creating debian/tests/
+</span><span style="color:#82aaff;">Installing debian/tests/control
+</span><span style="color:#82aaff;">Installing debian/tests/installcheck
+</span><span style="color:#82aaff;">Installing debian/watch
+</span><span style="color:#82aaff;">Updating debian/control from debian/control.in
+</span><span style="color:#82aaff;">Creating debian/changelog
+</span></code></pre>
+<p>Post this a debian folder would be created. It has same structure of what <code>dh_make</code> creates hence the meaning of the files can be found anywhere on the internet.</p>
+<h3 id="3-updating-necessary-files">3. Updating necessary files</h3>
+<p>After updating the nexecassry parts, the folder is ready to be built(incase of procedural languages) and packaged.</p>
+<h3 id="4-build-the-extension">4. Build the extension</h3>
+<p>PostgreSQL has a cli tool pg_buildext which is extremely helpful in building the package. A great documentation of it is available on the <a rel="noopener nofollow noreferrer" target="_blank" href="https://manpages.debian.org/stretch/postgresql-server-dev-all/pg_buildext.1.en.html">manpage</a> .</p>
+<h3 id="5-package-the-extension">5. Package the extension</h3>
+<p>The final step comes to packaging the extension. To just verify there must be a README.* file in the root of the extension. 
+Run the <code>dpkg_buildpackage</code> if a tarball of the source code already exists and  <code>dpkg_buildpackage -b</code> if not. This would test the extension on the supported pg versions and then create the necessary deb files ready to be shipped.</p>
+<pre data-lang="bash" style="background-color:#212121;color:#eeffff;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#82aaff;">vagrant@ubuntu-focal:/vagrant/base36-0.0.1$ dpkg-buildpackage</span><span style="color:#89ddff;"> -</span><span style="color:#f78c6c;">b
+</span><span style="color:#82aaff;">dpkg-buildpackage: info: source package base36
+</span><span style="color:#82aaff;">dpkg-buildpackage: info: source version 0.0.1-1
+</span><span style="color:#82aaff;">dpkg-buildpackage: info: source distribution UNRELEASED
+</span><span style="color:#82aaff;">dpkg-buildpackage: info: source changed by  </span><span style="color:#89ddff;">&lt;</span><span style="color:#82aaff;">vagrant@localhost</span><span style="color:#89ddff;">&gt;
+</span><span style="color:#82aaff;">dpkg-buildpackage: info: host architecture amd64
+</span><span> </span><span style="color:#82aaff;">dpkg-source</span><span style="color:#89ddff;"> --</span><span style="color:#f78c6c;">before-build</span><span style="color:#82aaff;"> .
+</span><span> </span><span style="color:#82aaff;">debian/rules clean
+</span><span style="color:#82aaff;">dh clean</span><span style="color:#89ddff;"> --</span><span style="color:#f78c6c;">with</span><span style="color:#82aaff;"> pgxs
+</span><span>   </span><span style="color:#82aaff;">dh_auto_clean</span><span style="color:#89ddff;"> --</span><span style="color:#f78c6c;">buildsystem</span><span style="color:#89ddff;">=</span><span style="color:#82aaff;">pgxs
+</span><span>        </span><span style="color:#82aaff;">pg_buildext clean build-</span><span style="color:#89ddff;">%</span><span>v</span><span style="color:#82aaff;"> postgresql-</span><span style="color:#89ddff;">%</span><span>v</span><span style="color:#82aaff;">-base36
+</span><span style="color:#82aaff;">rm</span><span style="color:#89ddff;"> -</span><span style="color:#f78c6c;">rf</span><span style="color:#82aaff;"> build-10/ build-11/ build-12/ build-13/ build-14/ build-15/
+</span><span style="color:#82aaff;">rm</span><span style="color:#89ddff;"> -</span><span style="color:#f78c6c;">rf</span><span style="color:#82aaff;"> debian/postgresql-10-base36/ debian/postgresql-11-base36/ debian/postgresql-12-base36/ debian/postgresql-13-base36/ debian/postgresql-14-base36/ debian/postgresql-15-base36/ debian/postgresql-10-base36.substvars debian/postgresql-11-base36.substvars debian/postgresql-12-base36.substvars debian/postgresql-13-base36.substvars debian/postgresql-14-base36.substvars debian/postgresql-15-base36.substvars
+</span><span style="color:#82aaff;">make[1]: Entering directory </span><span style="color:#89ddff;">&#39;</span><span style="color:#c3e88d;">/vagrant/base36-0.0.1</span><span style="color:#89ddff;">&#39;
+</span><span style="color:#82aaff;">rm</span><span style="color:#89ddff;"> -</span><span style="color:#f78c6c;">rf</span><span style="color:#82aaff;"> results/ regression.diffs regression.out tmp_check/ tmp_check_iso/ log/ output_iso/
+</span><span style="color:#82aaff;">make[1]: Leaving directory </span><span style="color:#89ddff;">&#39;</span><span style="color:#c3e88d;">/vagrant/base36-0.0.1</span><span style="color:#89ddff;">&#39;
+</span><span>   </span><span style="color:#82aaff;">dh_clean
+</span><span>   </span><span style="color:#82aaff;">pg_buildext checkcontrol
+</span><span> </span><span style="color:#82aaff;">debian/rules binary
+</span><span style="color:#82aaff;">dh binary</span><span style="color:#89ddff;"> --</span><span style="color:#f78c6c;">with</span><span style="color:#82aaff;"> pgxs
+</span><span>   </span><span style="color:#82aaff;">dh_update_autotools_config
+</span><span>   </span><span style="color:#82aaff;">dh_autoreconf
+</span><span>   </span><span style="color:#82aaff;">dh_auto_configure
+</span><span>   </span><span style="color:#82aaff;">dh_auto_build</span><span style="color:#89ddff;"> --</span><span style="color:#f78c6c;">buildsystem</span><span style="color:#89ddff;">=</span><span style="color:#82aaff;">pgxs
+</span><span>        </span><span style="color:#82aaff;">pg_buildext build build-</span><span style="color:#89ddff;">%</span><span>v
+</span><span style="color:#82aaff;">---
+</span><span style="color:#82aaff;">building for each postgresql version
+</span><span style="color:#82aaff;">---
+</span><span>   </span><span style="color:#82aaff;">create-stamp debian/debhelper-build-stamp
+</span><span>   </span><span style="color:#82aaff;">dh_testroot
+</span><span>   </span><span style="color:#82aaff;">dh_prep
+</span><span>   </span><span style="color:#82aaff;">dh_auto_install</span><span style="color:#89ddff;"> --</span><span style="color:#f78c6c;">buildsystem</span><span style="color:#89ddff;">=</span><span style="color:#82aaff;">pgxs
+</span><span>        </span><span style="color:#82aaff;">pg_buildext install build-</span><span style="color:#89ddff;">%</span><span>v</span><span style="color:#82aaff;"> postgresql-</span><span style="color:#89ddff;">%</span><span>v</span><span style="color:#82aaff;">-base36
+</span><span style="color:#82aaff;">--- 
+</span><span style="color:#82aaff;">installing extension for each postgresql version 
+</span><span style="color:#82aaff;">make[1]: Entering directory </span><span style="color:#89ddff;">&#39;</span><span style="color:#c3e88d;">/vagrant/base36-0.0.1</span><span style="color:#89ddff;">&#39;
+</span><span style="color:#82aaff;">dh_installdocs</span><span style="color:#89ddff;"> --</span><span style="color:#f78c6c;">all</span><span style="color:#82aaff;"> README.</span><span style="color:#89ddff;">*
+</span><span style="color:#82aaff;">make[1]: Leaving directory </span><span style="color:#89ddff;">&#39;</span><span style="color:#c3e88d;">/vagrant/base36-0.0.1</span><span style="color:#89ddff;">&#39;
+</span><span>   </span><span style="color:#82aaff;">dh_installchangelogs
+</span><span>   </span><span style="color:#82aaff;">dh_perl
+</span><span>   </span><span style="color:#82aaff;">dh_link
+</span><span>   </span><span style="color:#82aaff;">dh_pgxs_test
+</span><span>        </span><span style="color:#82aaff;">pg_buildext installcheck . build-</span><span style="color:#89ddff;">%</span><span>v</span><span style="color:#82aaff;"> postgresql-</span><span style="color:#89ddff;">%</span><span>v</span><span style="color:#82aaff;">-base36
+</span><span style="color:#82aaff;">---
+</span><span style="color:#82aaff;">running tests on each version
+</span><span style="color:#82aaff;">---
+</span><span>
+</span><span style="color:#82aaff;">make[1]: Leaving directory </span><span style="color:#89ddff;">&#39;</span><span style="color:#c3e88d;">/vagrant/base36-0.0.1/build-15</span><span style="color:#89ddff;">&#39;
+</span><span style="color:#82aaff;">Dropping cluster 15/regress ...
+</span><span style="font-style:italic;color:#4a4a4a;">### End 15 installcheck ###
+</span><span>   </span><span style="color:#82aaff;">dh_strip_nondeterminism
+</span><span>   </span><span style="color:#82aaff;">dh_compress
+</span><span>   </span><span style="color:#82aaff;">dh_fixperms
+</span><span>   </span><span style="color:#82aaff;">dh_missing
+</span><span>   </span><span style="color:#82aaff;">dh_dwz
+</span><span>   </span><span style="color:#82aaff;">dh_strip
+</span><span>   </span><span style="color:#82aaff;">dh_makeshlibs
+</span><span>   </span><span style="color:#82aaff;">dh_shlibdeps
+</span><span>   </span><span style="color:#82aaff;">dh_installdeb
+</span><span>   </span><span style="color:#82aaff;">dh_gencontrol
+</span><span style="color:#82aaff;">dpkg-gencontrol: warning: Depends field of package postgresql-13-base36: substitution variable </span><span style="color:#89ddff;">${</span><span>shlibs</span><span style="color:#89ddff;">:</span><span style="color:#82aaff;">Depends</span><span style="color:#89ddff;">}</span><span style="color:#82aaff;"> used, but is not defined
+</span><span style="color:#82aaff;">dpkg-gencontrol: warning: Depends field of package postgresql-10-base36: substitution variable </span><span style="color:#89ddff;">${</span><span>shlibs</span><span style="color:#89ddff;">:</span><span style="color:#82aaff;">Depends</span><span style="color:#89ddff;">}</span><span style="color:#82aaff;"> used, but is not defined
+</span><span style="color:#82aaff;">dpkg-gencontrol: warning: Depends field of package postgresql-14-base36: substitution variable </span><span style="color:#89ddff;">${</span><span>shlibs</span><span style="color:#89ddff;">:</span><span style="color:#82aaff;">Depends</span><span style="color:#89ddff;">}</span><span style="color:#82aaff;"> used, but is not defined
+</span><span style="color:#82aaff;">dpkg-gencontrol: warning: Depends field of package postgresql-11-base36: substitution variable </span><span style="color:#89ddff;">${</span><span>shlibs</span><span style="color:#89ddff;">:</span><span style="color:#82aaff;">Depends</span><span style="color:#89ddff;">}</span><span style="color:#82aaff;"> used, but is not defined
+</span><span style="color:#82aaff;">dpkg-gencontrol: warning: Depends field of package postgresql-15-base36: substitution variable </span><span style="color:#89ddff;">${</span><span>shlibs</span><span style="color:#89ddff;">:</span><span style="color:#82aaff;">Depends</span><span style="color:#89ddff;">}</span><span style="color:#82aaff;"> used, but is not defined
+</span><span style="color:#82aaff;">dpkg-gencontrol: warning: Depends field of package postgresql-12-base36: substitution variable </span><span style="color:#89ddff;">${</span><span>shlibs</span><span style="color:#89ddff;">:</span><span style="color:#82aaff;">Depends</span><span style="color:#89ddff;">}</span><span style="color:#82aaff;"> used, but is not defined
+</span><span>   </span><span style="color:#82aaff;">dh_md5sums
+</span><span>   </span><span style="color:#82aaff;">dh_builddeb
+</span><span style="color:#82aaff;">dpkg-deb: building package </span><span style="color:#89ddff;">&#39;</span><span style="color:#c3e88d;">postgresql-10-base36</span><span style="color:#89ddff;">&#39;</span><span style="color:#82aaff;"> in </span><span style="color:#89ddff;">&#39;</span><span style="color:#c3e88d;">../postgresql-10-base36_0.0.1-1_amd64.deb</span><span style="color:#89ddff;">&#39;</span><span style="color:#82aaff;">.
+</span><span style="color:#82aaff;">dpkg-deb: building package </span><span style="color:#89ddff;">&#39;</span><span style="color:#c3e88d;">postgresql-13-base36</span><span style="color:#89ddff;">&#39;</span><span style="color:#82aaff;"> in </span><span style="color:#89ddff;">&#39;</span><span style="color:#c3e88d;">../postgresql-13-base36_0.0.1-1_amd64.deb</span><span style="color:#89ddff;">&#39;</span><span style="color:#82aaff;">.
+</span><span style="color:#82aaff;">dpkg-deb: building package </span><span style="color:#89ddff;">&#39;</span><span style="color:#c3e88d;">postgresql-11-base36</span><span style="color:#89ddff;">&#39;</span><span style="color:#82aaff;"> in </span><span style="color:#89ddff;">&#39;</span><span style="color:#c3e88d;">../postgresql-11-base36_0.0.1-1_amd64.deb</span><span style="color:#89ddff;">&#39;</span><span style="color:#82aaff;">.
+</span><span style="color:#82aaff;">dpkg-deb: building package </span><span style="color:#89ddff;">&#39;</span><span style="color:#c3e88d;">postgresql-14-base36</span><span style="color:#89ddff;">&#39;</span><span style="color:#82aaff;"> in </span><span style="color:#89ddff;">&#39;</span><span style="color:#c3e88d;">../postgresql-14-base36_0.0.1-1_amd64.deb</span><span style="color:#89ddff;">&#39;</span><span style="color:#82aaff;">.
+</span><span style="color:#82aaff;">dpkg-deb: building package </span><span style="color:#89ddff;">&#39;</span><span style="color:#c3e88d;">postgresql-12-base36</span><span style="color:#89ddff;">&#39;</span><span style="color:#82aaff;"> in </span><span style="color:#89ddff;">&#39;</span><span style="color:#c3e88d;">../postgresql-12-base36_0.0.1-1_amd64.deb</span><span style="color:#89ddff;">&#39;</span><span style="color:#82aaff;">.
+</span><span style="color:#82aaff;">dpkg-deb: building package </span><span style="color:#89ddff;">&#39;</span><span style="color:#c3e88d;">postgresql-15-base36</span><span style="color:#89ddff;">&#39;</span><span style="color:#82aaff;"> in </span><span style="color:#89ddff;">&#39;</span><span style="color:#c3e88d;">../postgresql-15-base36_0.0.1-1_amd64.deb</span><span style="color:#89ddff;">&#39;</span><span style="color:#82aaff;">.
+</span><span> </span><span style="color:#82aaff;">dpkg-genbuildinfo</span><span style="color:#89ddff;"> --</span><span style="color:#f78c6c;">build</span><span style="color:#89ddff;">=</span><span style="color:#82aaff;">binary
+</span><span> </span><span style="color:#82aaff;">dpkg-genchanges</span><span style="color:#89ddff;"> --</span><span style="color:#f78c6c;">build</span><span style="color:#89ddff;">=</span><span style="color:#82aaff;">binary </span><span style="color:#89ddff;">&gt;</span><span style="color:#82aaff;">../base36_0.0.1-1_amd64.changes
+</span><span style="color:#82aaff;">dpkg-genchanges: info: binary-only upload (no source code included</span><span>)
+</span><span> </span><span style="color:#82aaff;">dpkg-source</span><span style="color:#89ddff;"> --</span><span style="color:#f78c6c;">after-build</span><span style="color:#82aaff;"> .
+</span><span style="color:#82aaff;">dpkg-buildpackage: info: binary-only upload (no source included</span><span>)
+</span></code></pre>
+<p>After this the parent of the root directory would have deb of each version of the extension would be created.</p>
+<pre data-lang="bash" style="background-color:#212121;color:#eeffff;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#82aaff;">vagrant@ubuntu-focal:/vagrant/base36-0.0.1$ ls</span><span style="color:#89ddff;"> -</span><span style="color:#f78c6c;">la</span><span style="color:#82aaff;"> ..
+</span><span style="color:#82aaff;">drwxr-xr-x  1 vagrant vagrant   4096 Jul  1 20:21 base36-0.0.1
+</span><span style="color:#82aaff;">-rw-r--r--  1 vagrant vagrant  11760 Jul  1 18:11 base36_0.0.1-1_amd64.buildinfo
+</span><span style="color:#82aaff;">-rw-r--r--  1 vagrant vagrant   2910 Jul  1 18:11 base36_0.0.1-1_amd64.changes
+</span><span style="color:#82aaff;">-rw-r--r--  1 vagrant vagrant    820 Jul  1 12:10 base36_0.0.1.orig.tar.gz
+</span><span style="color:#82aaff;">-rw-r--r--  1 vagrant vagrant   2552 Jul  1 18:11 postgresql-10-base36_0.0.1-1_amd64.deb
+</span><span style="color:#82aaff;">-rw-r--r--  1 vagrant vagrant   2552 Jul  1 18:11 postgresql-11-base36_0.0.1-1_amd64.deb
+</span><span style="color:#82aaff;">-rw-r--r--  1 vagrant vagrant   2552 Jul  1 18:11 postgresql-12-base36_0.0.1-1_amd64.deb
+</span><span style="color:#82aaff;">-rw-r--r--  1 vagrant vagrant   2556 Jul  1 18:11 postgresql-13-base36_0.0.1-1_amd64.deb
+</span><span style="color:#82aaff;">-rw-r--r--  1 vagrant vagrant   2552 Jul  1 18:11 postgresql-14-base36_0.0.1-1_amd64.deb
+</span><span style="color:#82aaff;">-rw-r--r--  1 vagrant vagrant   2556 Jul  1 18:11 postgresql-15-base36_0.0.1-1_amd64.deb
+</span></code></pre>
+<h3 id="gotchas">Gotchas:</h3>
+<ul>
+<li>The name of the folder of the source code of the extension should be of the form &lt;extension_name&gt;_<version>. </li>
+<li>The debian/pgversions file should have a newline otherwise any pg_buildext would neither return any output or any error(status code 0).</li>
+<li>The <code>postgresql-all</code> package would be needed to build, install and test the extension on all the supported versions of PostgreSQL.</li>
+</ul>
+<p>Fin.</p>
+</div>
+
+  
+<h2>Comments</h2>
+
+<script src="https://utteranc.es/client.js"
+        repo="rajivharlalka/rajivharlalka.github.io"
+        issue-term="pathname"
+        theme="photon-dark"
+        crossorigin="anonymous"
+        async>
+</script>
+
+
+  
+</article>
+
+        </div>
+
+      
+<footer>
+  <p>
+    <script>
+      document.write(new Date().getFullYear())
+    </script>
+    | 
+    <a href="https://github.com/rajivharlalka">Github</a> 
+    | 
+    <a href="/atom.xml">RSS</a>
+  </p>
+</footer>
+
+    </div>
+    
+<div class="navbar-mobile">
+  <ul class="navbar-nav">
+    
+    <li class="nav-item nav-link">
+       <a href="https:&#x2F;&#x2F;rajivharlalka.in&#x2F;about" class="navbar-item">
+        About Me
+      </a>
+    </li>
+    
+    <li class="nav-item nav-link">
+       <a href="https:&#x2F;&#x2F;rajivharlalka.in&#x2F;categories" class="navbar-item">
+        Categories
+      </a>
+    </li>
+    
+    <li class="nav-item nav-link">
+       <a href="https:&#x2F;&#x2F;notes.rajivharlalka.in" class="navbar-item">
+        Notes
+      </a>
+    </li>
+    
+    <li class="nav-item nav-link">
+       <a href="https:&#x2F;&#x2F;rajivharlalka.in&#x2F;Resume.pdf" class="navbar-item">
+        Resume
+      </a>
+    </li>
+    
+  </ul>
+</div>
+
+  </body>
+
+</html>

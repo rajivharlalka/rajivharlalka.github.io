@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta content="IE=edge" http-equiv="X-UA-Compatible" />
+    <meta content="text/html; charset=utf-8" http-equiv="content-type" />
+    <!-- Enable responsiveness on mobile devices-->
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+    
+    <link rel="alternate" type= "application/atom+xml"  title="RSS" href="https://rajivharlalka.in/atom.xml" /> 
+
+    <title>
+      
+    Rajiv - Understanding PostgreSQL
+
+    </title>
+
+    <link href="https://rajivharlalka.in/site.css" rel="stylesheet" />
+    
+    <meta content="website" property="og:type"/>
+    <meta content="Rajiv" property="og:site_name"/>
+    <meta content="https://rajivharlalka.in/understanding-postgresql/" property="og:url"/>
+    <meta content="https://rajivharlalka.in/understanding-postgresql/" property="twitter:url"/>
+    
+        <meta content="Understanding PostgreSQL" property="og:title"/>
+        <meta content="Understanding PostgreSQL" property="twitter:title"/>
+    
+    
+        <meta content="This is a brief writeup of my understanding PostgreSQL on a high level" property="description"/>
+        <meta content="This is a brief writeup of my understanding PostgreSQL on a high level" property="og:description"/>
+        <meta content="This is a brief writeup of my understanding PostgreSQL on a high level" property="twitter:description"/>
+    
+    
+        <meta content="summary_large_image" property="twitter:card"/>
+        <meta content="https://rajivharlalka.in/images/cover.png" property="og:image"/>
+        <meta content="https://rajivharlalka.in/images/cover.png" property="twitter:image"/>
+    
+
+    
+    
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="keywords" content="blog,rajivharlalka,website, tech, learning" />
+    <script async defer data-website-id="9b871309-d397-4b82-840a-9ad23c34a546" src="https://um.rajivharlalka.in/umami.js"></script>
+  </head>
+
+  <body>
+    <div class="container">
+
+      
+<header>
+  <nav class="navbar">
+    <div class="navbar-left">
+      <a href="https://rajivharlalka.in" class="navbar-title">
+          Rajiv
+      </a>
+    </div>
+
+
+    <div class="navbar-right">
+      <ul class="navbar-nav">
+        
+        <li class="nav-item nav-link">
+           <a href="https:&#x2F;&#x2F;rajivharlalka.in&#x2F;about" class="navbar-item">
+            About Me
+          </a>
+        </li>
+        
+        <li class="nav-item nav-link">
+           <a href="https:&#x2F;&#x2F;rajivharlalka.in&#x2F;categories" class="navbar-item">
+            Categories
+          </a>
+        </li>
+        
+        <li class="nav-item nav-link">
+           <a href="https:&#x2F;&#x2F;notes.rajivharlalka.in" class="navbar-item">
+            Notes
+          </a>
+        </li>
+        
+        <li class="nav-item nav-link">
+           <a href="https:&#x2F;&#x2F;rajivharlalka.in&#x2F;Resume.pdf" class="navbar-item">
+            Resume
+          </a>
+        </li>
+        
+      </ul>
+    </div>
+  </nav>
+</header>
+
+
+        <div class="content">
+          
+<article class="blog-page">
+  <div class="header">
+    <div class="meta">
+      
+      <div class="date">2023-06-06</div>
+      
+
+      
+      <div class="tags">
+        
+        <a href="https://rajivharlalka.in/categories/postgresql/" class="tag">
+          postgresql
+        </a>
+        
+        <a href="https://rajivharlalka.in/categories/tech/" class="tag">
+          tech
+        </a>
+        
+        <a href="https://rajivharlalka.in/categories/open-source/" class="tag">
+          open-source
+        </a>
+        
+      </div>
+      
+    </div>
+    <div class="title">Understanding PostgreSQL</div>
+    <div class="description">This is a brief writeup of my understanding PostgreSQL on a high level</div>
+  </div>
+  <div class="content"><p>Hi all, Hope everyone is doing fine.</p>
+<p>During my recent calls with my GSoC Mentors to discuss on my project, I was quite often asked to understand all moving parts of PostgreSQL atleast from a high level. In this writeup I would briefly discuss what I learnt and understood and maybe posts respective to each topic might follow-on later.</p>
+<p>The main places where I had been acquiring knowledge were blogs by depesz , PostgreSQL documentation and watching conferences on Youtube. Examining the different features which PostgreSQL offers, it was quite remarkable to see that how the SOLID principles apply here. Seperability of Concern was something quite visible, each part has it's own function and it is best at doing it's job without interfering others. Below are some of them which I found quite Interesting to talk</p>
+<h2 id="guc-grand-unified-configuration">GUC: Grand Unified Configuration</h2>
+<p>GUC or Grand Unified Configuration are some configuration parameters in PostgreSQL which control the working of every other part. There are 350+ GUC stored in <code>$PGDATA/postgresql.conf</code> that can be tuned. Every GUC has a different function and the .conf file has been seperated nicely as per the category in their function is.</p>
+<p>Properties such as <code>work_mem</code>, <code>shared_buffers</code> control the memory usage of the server , while <code>seq_page_cost</code>, <code>random_page_cost</code> help the query planner undestand a better plan to find the data.</p>
+<p>Configurations around Logging, Replication, Vacuuming are all present in the same configuration file segmented out in parts to be used as necessary. The conf file also allows <code>include</code> directives incase someone wishes to have seperate files for every Segment. Such cases are helpful when one wishes to have different configuration quite often, such as a <code>vacuum.conf.day</code> and <code>vacuum.conf.night</code> soft linked to <code>vacuum.conf</code> as per need. This even helps in easy knowing which configuration is currently used by just checking the file which the main config is linked to (using <code>ls -la</code>).</p>
+<p>There are multiple interepretation of anomalies happening due to incorrect values of GUC's. For example: A large number of temporary tables being created indicates less <code>work_mem</code> as data is spilled to disk and temporary tables are created to sort, and anaylze rows.</p>
+<h2 id="logging">Logging</h2>
+<p>PostgreSQL offers varieties of option to configure Logging. Apart from an <code>stdout</code>,  logging as a csv, json and syslog are available. </p>
+<p>Apart from the other granular details, one important thing to use and notice is log rotation. Once set, the file in which log is to be written changes automatically. This is useful in cases if logs of specific day and time is to be visualized. </p>
+<h2 id="wal-write-ahead-log">WAL: Write Ahead Log</h2>
+<p>This is another type of log but not exactly log. Wal files help in event of crash to rewind and restore the database. It also helps in reducing the number of disl writes sync making the queries faster. There is an another process running that cleans up these WAL files and flushes data to disk once transactions related to them are complete.</p>
+<p>Configuring the value of <code>max_wal_size</code> and <code>checkpoint_timeout</code> one can change how fast or slow checkpointers are going to flush the value in disk. Frequent checkpoints help in faster recovery incase of crashes but it comes at a cost <a rel="noopener nofollow noreferrer" target="_blank" href="https://www.postgresql.org/docs/current/wal-configuration.html#:~:text=Reducing%20checkpoint_timeout%20and,disk%20I/O.pg">1</a>. Very frequent checkpoints can cause higher wal production, resulting in a unexpected i/o.</p>
+<h2 id="pg-dump-and-pg-basebackup">pg_dump and pg_basebackup</h2>
+<p>There are various cases where data from a server needs to be shifted/copied to anther location/server. Postgres provides two major ways of doing it.</p>
+<ol>
+<li>pg_dump (Logical Replication)</li>
+<li>pg_basebackup (Physical Replication)</li>
+</ol>
+<p>In case of pg_dump or Logical Replication, Postgres generates a SQL file that if replayed in another new Postgres server, would generate the exact same data. It flushes all the rows ,tables and users necessary to create the replica of the server. Indexes need to be created again since pg_dump generates the SQL that can create the same index again. This is a disadvantage as it might take hours to generate everything back again.</p>
+<p>A workaround for this is replicating using basebackup , which does physical replication. The replicated instance is ready to be up and running in seconds.</p>
+<blockquote>
+<p>So, why even do a pg_dump? <br/>
+&gt;Physical Replication are more error prone in case the system configurations do not match. OS versions, Locale settings are soemething that needs to be checked in such cases <a rel="noopener nofollow noreferrer" target="_blank" href="https://wiki.postgresql.org/wiki/Locale_data_changes">2</a></p>
+</blockquote>
+<p>This would be it for this post, would be reading more about each part individually and soon try to write seperate posts for them.</p>
+<p>Fin.</p>
+<hr />
+</div>
+
+  
+<h2>Comments</h2>
+
+<script src="https://utteranc.es/client.js"
+        repo="rajivharlalka/rajivharlalka.github.io"
+        issue-term="pathname"
+        theme="photon-dark"
+        crossorigin="anonymous"
+        async>
+</script>
+
+
+  
+</article>
+
+        </div>
+
+      
+<footer>
+  <p>
+    <script>
+      document.write(new Date().getFullYear())
+    </script>
+    | 
+    <a href="https://github.com/rajivharlalka">Github</a> 
+    | 
+    <a href="/atom.xml">RSS</a>
+  </p>
+</footer>
+
+    </div>
+    
+<div class="navbar-mobile">
+  <ul class="navbar-nav">
+    
+    <li class="nav-item nav-link">
+       <a href="https:&#x2F;&#x2F;rajivharlalka.in&#x2F;about" class="navbar-item">
+        About Me
+      </a>
+    </li>
+    
+    <li class="nav-item nav-link">
+       <a href="https:&#x2F;&#x2F;rajivharlalka.in&#x2F;categories" class="navbar-item">
+        Categories
+      </a>
+    </li>
+    
+    <li class="nav-item nav-link">
+       <a href="https:&#x2F;&#x2F;notes.rajivharlalka.in" class="navbar-item">
+        Notes
+      </a>
+    </li>
+    
+    <li class="nav-item nav-link">
+       <a href="https:&#x2F;&#x2F;rajivharlalka.in&#x2F;Resume.pdf" class="navbar-item">
+        Resume
+      </a>
+    </li>
+    
+  </ul>
+</div>
+
+  </body>
+
+</html>
