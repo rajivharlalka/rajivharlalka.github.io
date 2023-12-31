@@ -8,7 +8,7 @@ draft=false
 categories = ["gsoc","postgresql","tech","open-source"]
 +++
 
-TLDR: My GSoC has finally ended. Can read about the development done on the [Final Report](https://github.com/rajivharlalka/gsoc23-postgres/blob/main/Final_Report.md)and here's the repository link: [Repository](https://github.com/vyruss/pg_statviz). It was a great experience overall, got to learn a number of things, and things were pretty exciting.
+TLDR: My GSoC has finally ended. Can read about the development done on the [Final Report](https://github.com/rajivharlalka/gsoc23-postgres/blob/main/Final_Report.md) and here's the repository link: [Repository](https://github.com/vyruss/pg_statviz). It was a great experience overall, got to learn a number of things, and things were pretty exciting.
 
 ---
 ---
