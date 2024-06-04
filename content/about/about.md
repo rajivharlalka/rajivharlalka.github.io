@@ -6,7 +6,7 @@ template = "about.html"
 
 Hello There
 
- I am Rajiv, a Pre-Final Year Undergraduate Student at IIT Kharagpur. From spending my time either reading some random article on the internet to having a nice talk with my friends on [2.2](https://wiki.metakgp.org/w/2.2) , my time has been passing by recently. I am into writing code in Javascript and Go , have developed a low key-hate for Python. Recently had a exposure on containerization and  orchestration tools whose working parts fantisized me a lot. Exploring Databases as Distributed systems, System Design currently and it's worth learning.
+ I am Rajiv, a Final Year Undergrad at IIT Kharagpur. From spending my time either reading some random article on the internet to having a nice talk with my friends on [2.2](https://wiki.metakgp.org/w/2.2) , my time has been passing by recently. I am into writing code in Javascript and Go , have developed a low key-hate for Python. Recently had a exposure on containerization and  orchestration tools whose working parts fantisized me a lot. Exploring Databases as Distributed systems, System Design currently and it's worth learning.
 
  Am part of a group of Open Source ethusiasts , [Kharagpur Open Source Society](https://kossiitkgp.org) where we conduct Workshop, seminars on Git,Linux and other Tools to spread the word about Open Source among the college students. 
 
