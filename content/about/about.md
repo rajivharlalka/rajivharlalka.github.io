@@ -10,7 +10,7 @@ Hello There
 
  Am part of a group of Open Source ethusiasts , [Kharagpur Open Source Society](https://kossiitkgp.org) where we conduct Workshop, seminars on Git,Linux and other Tools to spread the word about Open Source among the college students. 
 
- Can find me anytime listening to Moozic of all sorts which have a soothing tune. Nah, Drums don't amuse me. Why pain the ear when can have a soft sound soothen the mind. 
+ Can find me anytime listening to Moozic of all sorts which have a soothing tune. Nah, Drums don't amuse me. Why pain the ear when can have a soft sound soothen the mind. Have been finding nature quite pleasant and like to sit alone in a garden full of trees to relax after a tiring day.
 
  Here's my soothing playlist for you :) 
 
