@@ -33,7 +33,7 @@ Resolution: To try to grow this 10x i.e. have 20 meaningful reads in 2024. I wou
 
 Every time I read a tech blog, I understand this is something new. There is always a more to things. And this parts excites me the most. I wish to strive for the day when I can say to myself, "I am the best in xyz". Learning everyday has become one of my routines and this is something I wish to continue forward. To list fown, here's my tech setup I had for 2023:
 
-- Phone: Iphone 14 (though used my Samsung M31 for most of the year, now switched completely to Ios)
+- Phone: Iphone 14 (though used my Samsung M31 for most of the year, now switched completely to iOS)
 - Laptop and OS : Dell G3 3500 with Arch Linux <3
 - Monitor: SAMSUNG 24 inch IPS Backlit
 - Mouse: Dell MS 116
