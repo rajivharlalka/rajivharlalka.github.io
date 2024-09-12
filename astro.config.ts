@@ -21,7 +21,7 @@ const redirectList = [
   {
     id: 1,
     source: '/turning-22/',
-    destination: '/posts/turning-22/',
+    destination: '/posts/turning_22/',
     permanent: true,
   },
   {
@@ -39,7 +39,7 @@ const redirectList = [
   {
     id: 4,
     source: '/pgsqlphriday-14/',
-    destination: '/posts/pgsqlphriday-14/',
+    destination: '/posts/pgsqlphriday_14/',
     permanent: true,
   },
   {
@@ -51,31 +51,31 @@ const redirectList = [
   {
     id: 6,
     source: '/packaging-extensions-in-debian/',
-    destination: '/posts/packaging-extensions-in-debian/',
+    destination: '/posts/packaging_extensions_in_debian/',
     permanent: true,
   },
   {
     id: 7,
     source: '/magic-with-generate-series/',
-    destination: '/posts/magic-with-generate-series/',
+    destination: '/posts/magic_with_generate_series/',
     permanent: true,
   },
   {
     id: 7,
     source: '/recursive-macros/',
-    destination: '/posts/recursive-macros/',
+    destination: '/posts/recursive_macros/',
     permanent: true,
   },
   {
     id: 8,
     source: '/gsoc-post-2/',
-    destination: '/posts/gsoc-post-2/',
+    destination: '/posts/gsoc_post_2/',
     permanent: true,
   },
   {
     id: 9,
     source: '/understanding-postgresql/',
-    destination: '/posts/understanding-postgresql/',
+    destination: '/posts/understanding_postgresql/',
     permanent: true,
   },
   {
@@ -152,7 +152,7 @@ export default defineConfig({
     },
     plugins: [rawFonts(['.ttf', '.woff'])],
   },
-  redirects: redirects,
+  redirects: redirects
 })
 
 function rawFonts(ext: string[]) {
