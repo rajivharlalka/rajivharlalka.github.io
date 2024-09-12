@@ -23,6 +23,10 @@ export const siteConfig: SiteConfig = {
   sortPostsByUpdatedDate: false,
   // Meta property used to construct the meta title property, found in src/components/BaseHead.astro L:11
   title: 'Rajiv Harlalka',
+	webmentions: {
+		// Webmention.io API endpoint. Get your own here: https://webmention.io/, and follow this blog post: https://astro-cactus.chriswilliams.dev/posts/webmentions/
+		link: "https://webmention.io/rajivharlalka.in/webmention",
+	},
 }
 
 // Used to generate links in both the Header & Footer.
