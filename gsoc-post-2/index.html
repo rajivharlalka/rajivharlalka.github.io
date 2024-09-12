@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta content="IE=edge" http-equiv="X-UA-Compatible" />
+    <meta content="text/html; charset=utf-8" http-equiv="content-type" />
+    <!-- Enable responsiveness on mobile devices-->
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+    
+    <link rel="alternate" type= "application/atom+xml"  title="RSS" href="https://rajivharlalka.in/atom.xml" /> 
+
+    <title>
+      
+    Rajiv - Getting started with GSoC@PostgreSQL
+
+    </title>
+
+    <link href="https://rajivharlalka.in/site.css" rel="stylesheet" />
+    
+    <meta content="website" property="og:type"/>
+    <meta content="Rajiv" property="og:site_name"/>
+    <meta content="https://rajivharlalka.in/gsoc-post-2/" property="og:url"/>
+    <meta content="https://rajivharlalka.in/gsoc-post-2/" property="twitter:url"/>
+    
+        <meta content="Getting started with GSoC@PostgreSQL" property="og:title"/>
+        <meta content="Getting started with GSoC@PostgreSQL" property="twitter:title"/>
+    
+    
+        <meta content="First Bi-weekly post on my work during GSoC " property="description"/>
+        <meta content="First Bi-weekly post on my work during GSoC " property="og:description"/>
+        <meta content="First Bi-weekly post on my work during GSoC " property="twitter:description"/>
+    
+    
+        <meta content="summary_large_image" property="twitter:card"/>
+        <meta content="https://rajivharlalka.in/images/cover.png" property="og:image"/>
+        <meta content="https://rajivharlalka.in/images/cover.png" property="twitter:image"/>
+    
+
+    
+    
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="keywords" content="blog,rajivharlalka,website, tech, learning" />
+    <script async defer data-website-id="9b871309-d397-4b82-840a-9ad23c34a546" src="https://um.rajivharlalka.in/umami.js"></script>
+  </head>
+
+  <body>
+    <div class="container">
+
+      
+<header>
+  <nav class="navbar">
+    <div class="navbar-left">
+      <a href="https://rajivharlalka.in" class="navbar-title">
+          Rajiv
+      </a>
+    </div>
+
+
+    <div class="navbar-right">
+      <ul class="navbar-nav">
+        
+        <li class="nav-item nav-link">
+           <a href="https:&#x2F;&#x2F;rajivharlalka.in&#x2F;about" class="navbar-item">
+            About Me
+          </a>
+        </li>
+        
+        <li class="nav-item nav-link">
+           <a href="https:&#x2F;&#x2F;rajivharlalka.in&#x2F;categories" class="navbar-item">
+            Categories
+          </a>
+        </li>
+        
+        <li class="nav-item nav-link">
+           <a href="https:&#x2F;&#x2F;notes.rajivharlalka.in" class="navbar-item">
+            Notes
+          </a>
+        </li>
+        
+        <li class="nav-item nav-link">
+           <a href="https:&#x2F;&#x2F;rajivharlalka.in&#x2F;Resume.pdf" class="navbar-item">
+            Resume
+          </a>
+        </li>
+        
+      </ul>
+    </div>
+  </nav>
+</header>
+
+
+        <div class="content">
+          
+<article class="blog-page">
+  <div class="header">
+    <div class="meta">
+      
+      <div class="date">2023-06-08</div>
+      
+
+      
+      <div class="tags">
+        
+        <a href="https://rajivharlalka.in/categories/gsoc/" class="tag">
+          gsoc
+        </a>
+        
+        <a href="https://rajivharlalka.in/categories/postgresql/" class="tag">
+          postgresql
+        </a>
+        
+        <a href="https://rajivharlalka.in/categories/tech/" class="tag">
+          tech
+        </a>
+        
+        <a href="https://rajivharlalka.in/categories/open-source/" class="tag">
+          open-source
+        </a>
+        
+      </div>
+      
+    </div>
+    <div class="title">Getting started with GSoC@PostgreSQL</div>
+    <div class="description">First Bi-weekly post on my work during GSoC </div>
+  </div>
+  <div class="content"><p>Hi all, Hope you are doing great!</p>
+<p>This is the first biweekly post of my learning and understanding about PostgreSQL and the community alongside working on my proposal. My project is about creating an extension in Postgres that captures statistics and helps in monitoring of a running server.
+During the community bonding period(3th May,23 - 28th May,23), I spent most of my time understanding about the features on an high level, to look forward of what could be exactly important with respect to my project.</p>
+<p>It wasn't late that I understood that there isn't anything in Postgres that doesn't need monitoring. Every single SQL queries creates lots of changes internally to produce the desired result. PostgreSQL collects a number of statistics but what it doesn't do is what <a rel="noopener nofollow noreferrer" target="_blank" href="https://github.com/vyruss/pg_statviz">pg_statviz</a> tries to fulfill. Provide cumulative statistics over timerange to analyze changes overtime.</p>
+<h2 id="modules-increase">Modules Increase</h2>
+<p>There were multiple tables/views which I found that could provide valuable insights if queried over long time. Analysis on some of them are:</p>
+<h3 id="uptime">Uptime</h3>
+<p>Having an uptime statistics is useful to know the count of server crashes in that time interval. </p>
+<p>The <code>pg_postmaster_start_time()</code> function in psql helps to fetch the time when Postgres started, which can be easily utlilized to fetch the uptime.</p>
+<h3 id="locks">Locks</h3>
+<p>Postgres offers <a rel="noopener nofollow noreferrer" target="_blank" href="https://www.postgresql.org/docs/current/explicit-locking.html#:~:text=Table%2DLevel%20Lock%20Modes">8 types</a> of locks on tables. Each lock has it's utility and level of blocking access to different SQL queries. </p>
+<p>High number of concurrent locks can be a reason of high response time of DML SQL queries. As the avg number of locks increases, more the queries need to wait to be processed. </p>
+<p>The internal postgres view <code>pg_locks</code> provides details of every lock currently applied on every table in the database.</p>
+<p>While <code>mode</code> column in <code>pg_locks</code> tells which type of lock is applied, the <code>pid</code> tells the pid of the connection creating that lock.</p>
+<p>But what if a table wants an Exclusive lock on a table which the another lock is already imposed?</p>
+<p>In that case the connection needs to first wait to obtain that lock causing delays. A false value <code>granted</code> column indicates that lock is needed but isn't granted , meaning connection waiting for lock, and the <code>waitstart</code> tells the start time for the wait of lock. This is pretty useful to observe incases the wait time exceeds a lot.</p>
+<h3 id="user-tables-and-indexes">User Tables and Indexes</h3>
+<p>It's pretty fascinating to understand what goes behind the scene of DDL and DML queries on tables. Inserting rows does not imply data is written instantly to disk and deleting doesn't mean the row is permanently lost. </p>
+<p><a rel="noopener nofollow noreferrer" target="_blank" href="https://www.postgresql.org/docs/current/mvcc.html">MVCC</a> or Multi-Value Concurrency control is a feature in Postgres which handles multiple values accross various transactions. A values getting deleting from one transaction doesnt mean getting wiped off from others, kudos to MVCC. </p>
+<p>The <code>pg_stat_user_tables</code> and <code>pg_statio_user_tables</code> provide statistical information about the tables created by a user, and similar views exist for index too.</p>
+<p>The <code>*_blks_hit</code> refer to the rows which needed to be fetched from the disk and <code>*_blks_read</code> refer to fetching from the cache. This value helps in understanding the cache hit/ read ratio which indicated how many times the cursor needed to go to the disk to fetch a row. Higher the value, more the query response time.</p>
+<p>An important column is the <code>n_dead_tuple</code> which indicated the rows which have been updated or deleted and are no longer needed by any running transactions. The next time vacuum runs, these rows are permanently removed from the server.</p>
+<p>Similar views exist for table which help in getting to know how many times an index was utlized over a seq scan on that table. Incase the index is less utilized, it is an appropriate time to understand and tune the table indexes and constraints on which indexes are built. </p>
+<h1 id="testing-over-platforms">Testing over platforms</h1>
+<p>Since the views have been developed slowly over the years, there is a high chance that every view might not be available in all the latest version. Hence Testing over all readily maintained version of Postgres was needed.</p>
+<p>To implement that, I created a Github Action that checks the extension over all major versions (&gt;=10) parallely in matrix formation. 
+To do this I too help of the <a rel="noopener nofollow noreferrer" target="_blank" href="https://hub.docker.com/r/pgxn/pgxn-tools">PGXN Tool Docker Image</a> which builds and starts a Postgres cluster in a docker container. 
+Post the Cluster is started, the extension is installed and Regression tests are run to check the working. The Github Action for my tests can be found <a rel="noopener nofollow noreferrer" target="_blank" href="https://github.com/rajivharlalka/pg_statviz/blob/master/.github/workflows/main.yml">here</a>.</p>
+<br/>
+<p>Understanding the utility of these views, I created respective modules utilizing these views/tables which can be more explored in this <a rel="noopener nofollow noreferrer" target="_blank" href="https://github.com/vyruss/pg_statviz/pull/6">Pull Request</a>.</p>
+<p>Have also been active on multiple platforms such as Slack, Reddit and mailing lists of PostgreSQL trying to understand people's queries and answering a few. </p>
+<p>Also have been trying to maintain an readily updated <a rel="noopener nofollow noreferrer" target="_blank" href="https://gist.github.com/rajivharlalka/f9a54c95eeafeef58734e2006f957fed">public Gist</a> with my findings, readings and learning these days. Would be happy to answer any queries over any media and am open to suggestions to ideas if any :). </p>
+<p>Fin.</p>
+</div>
+
+  
+<h2>Comments</h2>
+
+<script src="https://utteranc.es/client.js"
+        repo="rajivharlalka/rajivharlalka.github.io"
+        issue-term="pathname"
+        theme="photon-dark"
+        crossorigin="anonymous"
+        async>
+</script>
+
+
+  
+</article>
+
+        </div>
+
+      
+<footer>
+  <p>
+    <script>
+      document.write(new Date().getFullYear())
+    </script>
+    | 
+    <a href="https://github.com/rajivharlalka">Github</a> 
+    | 
+    <a href="/atom.xml">RSS</a>
+  </p>
+</footer>
+
+    </div>
+    
+<div class="navbar-mobile">
+  <ul class="navbar-nav">
+    
+    <li class="nav-item nav-link">
+       <a href="https:&#x2F;&#x2F;rajivharlalka.in&#x2F;about" class="navbar-item">
+        About Me
+      </a>
+    </li>
+    
+    <li class="nav-item nav-link">
+       <a href="https:&#x2F;&#x2F;rajivharlalka.in&#x2F;categories" class="navbar-item">
+        Categories
+      </a>
+    </li>
+    
+    <li class="nav-item nav-link">
+       <a href="https:&#x2F;&#x2F;notes.rajivharlalka.in" class="navbar-item">
+        Notes
+      </a>
+    </li>
+    
+    <li class="nav-item nav-link">
+       <a href="https:&#x2F;&#x2F;rajivharlalka.in&#x2F;Resume.pdf" class="navbar-item">
+        Resume
+      </a>
+    </li>
+    
+  </ul>
+</div>
+
+  </body>
+
+</html>

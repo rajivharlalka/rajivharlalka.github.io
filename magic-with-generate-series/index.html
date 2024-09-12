@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta content="IE=edge" http-equiv="X-UA-Compatible" />
+    <meta content="text/html; charset=utf-8" http-equiv="content-type" />
+    <!-- Enable responsiveness on mobile devices-->
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+    
+    <link rel="alternate" type= "application/atom+xml"  title="RSS" href="https://rajivharlalka.in/atom.xml" /> 
+
+    <title>
+      
+    Rajiv - Magic with Generate Series in PostgreSQL
+
+    </title>
+
+    <link href="https://rajivharlalka.in/site.css" rel="stylesheet" />
+    
+    <meta content="website" property="og:type"/>
+    <meta content="Rajiv" property="og:site_name"/>
+    <meta content="https://rajivharlalka.in/magic-with-generate-series/" property="og:url"/>
+    <meta content="https://rajivharlalka.in/magic-with-generate-series/" property="twitter:url"/>
+    
+        <meta content="Magic with Generate Series in PostgreSQL" property="og:title"/>
+        <meta content="Magic with Generate Series in PostgreSQL" property="twitter:title"/>
+    
+    
+        <meta content="My experience with generate_series to generate test data in PostgreSQL for testing" property="description"/>
+        <meta content="My experience with generate_series to generate test data in PostgreSQL for testing" property="og:description"/>
+        <meta content="My experience with generate_series to generate test data in PostgreSQL for testing" property="twitter:description"/>
+    
+    
+        <meta content="summary_large_image" property="twitter:card"/>
+        <meta content="https://rajivharlalka.in/images/cover.png" property="og:image"/>
+        <meta content="https://rajivharlalka.in/images/cover.png" property="twitter:image"/>
+    
+
+    
+    
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="keywords" content="blog,rajivharlalka,website, tech, learning" />
+    <script async defer data-website-id="9b871309-d397-4b82-840a-9ad23c34a546" src="https://um.rajivharlalka.in/umami.js"></script>
+  </head>
+
+  <body>
+    <div class="container">
+
+      
+<header>
+  <nav class="navbar">
+    <div class="navbar-left">
+      <a href="https://rajivharlalka.in" class="navbar-title">
+          Rajiv
+      </a>
+    </div>
+
+
+    <div class="navbar-right">
+      <ul class="navbar-nav">
+        
+        <li class="nav-item nav-link">
+           <a href="https:&#x2F;&#x2F;rajivharlalka.in&#x2F;about" class="navbar-item">
+            About Me
+          </a>
+        </li>
+        
+        <li class="nav-item nav-link">
+           <a href="https:&#x2F;&#x2F;rajivharlalka.in&#x2F;categories" class="navbar-item">
+            Categories
+          </a>
+        </li>
+        
+        <li class="nav-item nav-link">
+           <a href="https:&#x2F;&#x2F;notes.rajivharlalka.in" class="navbar-item">
+            Notes
+          </a>
+        </li>
+        
+        <li class="nav-item nav-link">
+           <a href="https:&#x2F;&#x2F;rajivharlalka.in&#x2F;Resume.pdf" class="navbar-item">
+            Resume
+          </a>
+        </li>
+        
+      </ul>
+    </div>
+  </nav>
+</header>
+
+
+        <div class="content">
+          
+<article class="blog-page">
+  <div class="header">
+    <div class="meta">
+      
+      <div class="date">2023-06-23</div>
+      
+
+      
+      <div class="tags">
+        
+        <a href="https://rajivharlalka.in/categories/postgresql/" class="tag">
+          postgresql
+        </a>
+        
+        <a href="https://rajivharlalka.in/categories/gsoc/" class="tag">
+          gsoc
+        </a>
+        
+        <a href="https://rajivharlalka.in/categories/tech/" class="tag">
+          tech
+        </a>
+        
+      </div>
+      
+    </div>
+    <div class="title">Magic with Generate Series in PostgreSQL</div>
+    <div class="description">My experience with generate_series to generate test data in PostgreSQL for testing</div>
+  </div>
+  <div class="content"><p>Hi everyone,</p>
+<p>Recently I was pretty much involved in reading and understanding different parts of PostgreSQL, especially the cumulative and static statistics collector.
+Even more, the concepts of wal, replication, and archiving being some of the building blocks of how PostgreSQL handles multiple transactions were fascinating.</p>
+<p>To test different features, I needed data. And that too lots of data. I nearly filled my 1 Terabyte HDD generating test files to check out all types of queries, short-lived and long-running.</p>
+<p><code>generate_series</code> is a function in PostgreSQL which was my helper in all the tests. It's a simple function that takes 3 arguments, start - end, and interval, and generates rows in that range. Using multiple tweaks these simple functions can be used to generate a variety of data which can be extremely helpful in understanding PostgreSQL.</p>
+<p>Here are some of the tricks I read/learned/used to generate sample data for lots of testing.</p>
+<h2 id="integer-series">Integer Series</h2>
+<pre data-lang="SQL" style="background-color:#212121;color:#eeffff;" class="language-SQL "><code class="language-SQL" data-lang="SQL"><span style="font-style:italic;color:#4a4a4a;">-- Simple generation of integers 1..10 and 1,3..17,19
+</span><span style="color:#c792ea;">select</span><span> generate_series(</span><span style="color:#f78c6c;">1</span><span>,</span><span style="color:#f78c6c;">10</span><span>),generate_series(</span><span style="color:#f78c6c;">1</span><span>,</span><span style="color:#f78c6c;">20</span><span>,</span><span style="color:#f78c6c;">2</span><span>);   </span><span style="font-style:italic;color:#4a4a4a;">-- https://dbfiddle.uk/7nzIxoc3
+</span><span>
+</span><span style="font-style:italic;color:#4a4a4a;">-- decreasing sequence
+</span><span style="color:#c792ea;">select</span><span> generate_series(</span><span style="color:#f78c6c;">20</span><span>,</span><span style="color:#f78c6c;">10</span><span>,</span><span style="color:#89ddff;">-</span><span style="color:#f78c6c;">1</span><span>); </span><span style="font-style:italic;color:#4a4a4a;">-- https://dbfiddle.uk/VM6rK88I
+</span><span>
+</span><span style="font-style:italic;color:#4a4a4a;">-- series of random integers
+</span><span style="color:#c792ea;">select</span><span> (random</span><span style="color:#89ddff;">()</span><span style="font-style:italic;color:#ff5370;">*</span><span style="color:#f78c6c;">100</span><span>)::</span><span style="font-style:italic;color:#c792ea;">integer </span><span style="color:#c792ea;">from</span><span> generate_series(</span><span style="color:#f78c6c;">1</span><span>,</span><span style="color:#f78c6c;">10</span><span>); </span><span style="font-style:italic;color:#4a4a4a;">-- https://dbfiddle.uk/h9GW9Kl2
+</span></code></pre>
+<h2 id="character-and-strings">Character and Strings</h2>
+<pre data-lang="SQL" style="background-color:#212121;color:#eeffff;" class="language-SQL "><code class="language-SQL" data-lang="SQL"><span style="font-style:italic;color:#4a4a4a;">-- a sequence of characters
+</span><span style="color:#c792ea;">select</span><span> chr(i) </span><span style="color:#c792ea;">from</span><span> generate_series(</span><span style="color:#f78c6c;">48</span><span>,</span><span style="color:#f78c6c;">57</span><span>) i; </span><span style="font-style:italic;color:#4a4a4a;">-- https://dbfiddle.uk/ts78-LdF
+</span><span style="font-style:italic;color:#4a4a4a;">-- a sequence of repeating characters
+</span><span style="color:#c792ea;">select</span><span> repeat(</span><span style="color:#89ddff;">&#39;</span><span style="color:#c3e88d;">*</span><span style="color:#89ddff;">&#39;</span><span>,i) </span><span style="color:#c792ea;">from</span><span> generate_series(</span><span style="color:#f78c6c;">1</span><span>,</span><span style="color:#f78c6c;">10</span><span>) i; </span><span style="font-style:italic;color:#4a4a4a;">-- https://dbfiddle.uk/1KZ6GBDu
+</span></code></pre>
+<p>A bit complex query to generate names can be done using this:</p>
+<pre data-lang="SQL" style="background-color:#212121;color:#eeffff;" class="language-SQL "><code class="language-SQL" data-lang="SQL"><span style="color:#c792ea;">select</span><span> (
+</span><span>    </span><span style="color:#c792ea;">select</span><span> string_agg(x, </span><span style="color:#89ddff;">&#39;&#39;</span><span>)
+</span><span>    </span><span style="color:#c792ea;">from</span><span> (
+</span><span>        </span><span style="color:#c792ea;">select</span><span> arr[(random</span><span style="color:#89ddff;">()</span><span style="font-style:italic;color:#ff5370;">* </span><span style="color:#f78c6c;">31</span><span>):: </span><span style="font-style:italic;color:#c792ea;">int</span><span> % </span><span style="color:#f78c6c;">10</span><span>]
+</span><span>        </span><span style="color:#c792ea;">FROM
+</span><span>          (
+</span><span>            </span><span style="color:#c792ea;">SELECT
+</span><span>              </span><span style="color:#89ddff;">&#39;</span><span style="color:#c3e88d;">{AO, AB, MC, ED, OF, JE, NC, OQ, BN, KE}</span><span style="color:#89ddff;">&#39;</span><span>:: </span><span style="font-style:italic;color:#c792ea;">TEXT</span><span>[] </span><span style="color:#89ddff;">as</span><span> arr
+</span><span>          ) </span><span style="color:#89ddff;">as</span><span> name_syll,
+</span><span>          </span><span style="font-style:italic;color:#4a4a4a;">-- three-syllable words
+</span><span>          generate_series(</span><span style="color:#f78c6c;">1</span><span>, </span><span style="color:#f78c6c;">3 </span><span style="color:#89ddff;">+</span><span> id</span><span style="font-style:italic;color:#ff5370;">*</span><span style="color:#f78c6c;">0</span><span>)
+</span><span>      ) </span><span style="color:#89ddff;">as</span><span> name_syll(x)
+</span><span>  ) </span><span style="color:#89ddff;">as</span><span> name
+</span><span style="color:#c792ea;">from</span><span> generate_series(</span><span style="color:#f78c6c;">1</span><span>, </span><span style="color:#f78c6c;">10</span><span>) </span><span style="color:#89ddff;">as</span><span> id; </span><span style="font-style:italic;color:#4a4a4a;">-- https://dbfiddle.uk/5Nvx3xkw
+</span></code></pre>
+<p>The most important part here is the id*0 which forces a new name to be generated on every iteration. It has zero contribution in calculating the value but it makes the string_aggregator run again for every new value of name.</p>
+<h2 id="timestamping-time">Timestamping Time</h2>
+<pre data-lang="SQL" style="background-color:#212121;color:#eeffff;" class="language-SQL "><code class="language-SQL" data-lang="SQL"><span style="font-style:italic;color:#4a4a4a;">-- days of a week
+</span><span style="color:#c792ea;">select</span><span> generate_series(</span><span style="font-style:italic;color:#c792ea;">timestamp </span><span style="color:#89ddff;">&#39;</span><span style="color:#c3e88d;">2023-06-25</span><span style="color:#89ddff;">&#39;</span><span>, </span><span style="font-style:italic;color:#c792ea;">timestamp </span><span style="color:#89ddff;">&#39;</span><span style="color:#c3e88d;">2023-06-25</span><span style="color:#89ddff;">&#39; +</span><span> interval </span><span style="color:#89ddff;">&#39;</span><span style="color:#c3e88d;">1 week</span><span style="color:#89ddff;">&#39;</span><span>, interval </span><span style="color:#89ddff;">&#39;</span><span style="color:#c3e88d;">1 day</span><span style="color:#89ddff;">&#39;</span><span>); </span><span style="font-style:italic;color:#4a4a4a;">-- https://dbfiddle.uk/88f5ZQQ6
+</span><span style="font-style:italic;color:#4a4a4a;">-- first and last days of every month of a year
+</span><span style="color:#c792ea;">select
+</span><span>  id,
+</span><span>  id </span><span style="color:#89ddff;">+</span><span> interval </span><span style="color:#89ddff;">&#39;</span><span style="color:#c3e88d;">1 month - 1 day</span><span style="color:#89ddff;">&#39;
+</span><span style="color:#c792ea;">from
+</span><span>  generate_series(
+</span><span>    </span><span style="font-style:italic;color:#c792ea;">timestamp </span><span style="color:#89ddff;">&#39;</span><span style="color:#c3e88d;">2023-01-01</span><span style="color:#89ddff;">&#39;</span><span>, </span><span style="font-style:italic;color:#c792ea;">timestamp </span><span style="color:#89ddff;">&#39;</span><span style="color:#c3e88d;">2023-12-01</span><span style="color:#89ddff;">&#39;</span><span>,
+</span><span>    interval </span><span style="color:#89ddff;">&#39;</span><span style="color:#c3e88d;">1 month</span><span style="color:#89ddff;">&#39;
+</span><span>  ) id; </span><span style="font-style:italic;color:#4a4a4a;">-- https://dbfiddle.uk/3VAuatDu
+</span></code></pre>
+<h2 id="some-fun-tweaks">Some fun Tweaks</h2>
+<h4 id="generate-all-ipv4-addresses-in-cidr-notation">Generate All IPv4 Addresses in CIDR Notation</h4>
+<pre data-lang="SQL" style="background-color:#212121;color:#eeffff;" class="language-SQL "><code class="language-SQL" data-lang="SQL"><span style="color:#c792ea;">select
+</span><span>  (a::</span><span style="font-style:italic;color:#c792ea;">TEXT</span><span style="color:#89ddff;">||&#39;</span><span style="color:#c3e88d;">.</span><span style="color:#89ddff;">&#39;||</span><span>b::</span><span style="font-style:italic;color:#c792ea;">TEXT</span><span style="color:#89ddff;">||&#39;</span><span style="color:#c3e88d;">.</span><span style="color:#89ddff;">&#39;||</span><span>c::</span><span style="font-style:italic;color:#c792ea;">TEXT</span><span style="color:#89ddff;">||&#39;</span><span style="color:#c3e88d;">.</span><span style="color:#89ddff;">&#39;||</span><span>d::</span><span style="font-style:italic;color:#c792ea;">TEXT</span><span>):: </span><span style="font-style:italic;color:#c792ea;">CIDR </span><span style="color:#c792ea;">from
+</span><span>(
+</span><span>  generate_series(</span><span style="color:#f78c6c;">0</span><span>,</span><span style="color:#f78c6c;">255</span><span>) a
+</span><span>            </span><span style="color:#c792ea;">cross join
+</span><span>  generate_series(</span><span style="color:#f78c6c;">0</span><span>,</span><span style="color:#f78c6c;">255</span><span>) b
+</span><span>            </span><span style="color:#c792ea;">cross join
+</span><span>  generate_series(</span><span style="color:#f78c6c;">0</span><span>,</span><span style="color:#f78c6c;">255</span><span>) c
+</span><span>            </span><span style="color:#c792ea;">cross join
+</span><span>  generate_series(</span><span style="color:#f78c6c;">0</span><span>,</span><span style="color:#f78c6c;">255</span><span>) d
+</span><span>);
+</span><span style="font-style:italic;color:#4a4a4a;">-- https://dbfiddle.uk/dgvEkDCW
+</span></code></pre>
+<p>Caution before executing this query: The number of rows would be 256^4 = 4,294,967,296 ~ 4.2 Billion and will take up lots of space. I tried this on my system with addresses starting with 0 (0.*.*.*) and taking 5 minutes of execution, the table size was ~14 GB hence perform at its own risk.</p>
+<h4 id="a-normal-distribution">A Normal Distribution</h4>
+<p>From PostgreSQL 16, a new function <code>random_normal</code> is being included in the core which will make this easy. Till then writing the functions manually is the best bet available.</p>
+<pre data-lang="SQL" style="background-color:#212121;color:#eeffff;" class="language-SQL "><code class="language-SQL" data-lang="SQL"><span style="font-style:italic;color:#4a4a4a;">-- Referenced from https://stackoverflow.com/questions/53687946/beta-and-lognorm-distributions-in-postgresql
+</span><span style="color:#c792ea;">CREATE OR REPLACE FUNCTION </span><span style="color:#82aaff;">norm</span><span>(N </span><span style="font-style:italic;color:#c792ea;">INTEGER</span><span>, mu FLOAT </span><span style="color:#89ddff;">= </span><span style="color:#f78c6c;">0</span><span>, sigma FLOAT </span><span style="color:#89ddff;">= </span><span style="color:#f78c6c;">1</span><span>)
+</span><span>RETURNS </span><span style="color:#c792ea;">SET</span><span> OF FLOAT </span><span style="color:#89ddff;">AS
+</span><span>$BODY$
+</span><span style="color:#c792ea;">SELECT
+</span><span>    sigma</span><span style="font-style:italic;color:#ff5370;">*</span><span>sqrt(</span><span style="color:#89ddff;">-</span><span style="color:#f78c6c;">2</span><span>.</span><span style="font-style:italic;color:#ff5370;">*</span><span>ln(random</span><span style="color:#89ddff;">()</span><span>))</span><span style="font-style:italic;color:#ff5370;">*</span><span>cos(</span><span style="color:#f78c6c;">2</span><span style="font-style:italic;color:#ff5370;">*</span><span>pi</span><span style="color:#89ddff;">()</span><span style="font-style:italic;color:#ff5370;">*</span><span>random</span><span style="color:#89ddff;">()</span><span>) </span><span style="color:#89ddff;">+</span><span> mu
+</span><span style="color:#c792ea;">FROM
+</span><span>    generate_series(</span><span style="color:#f78c6c;">1</span><span>, N) </span><span style="color:#89ddff;">AS</span><span> i;
+</span><span>$BODY$
+</span><span>LANGUAGE SQL;
+</span><span>
+</span><span style="color:#c792ea;">select</span><span> norm(</span><span style="color:#f78c6c;">10000</span><span>);
+</span></code></pre>
+<h4 id="generating-data-with-weights">Generating data with weights</h4>
+<p>Suppose we want our data to be generated as follows:</p>
+<ul>
+<li>75% of data should be 1</li>
+<li>15% of data should be 2</li>
+<li>5% of data should be 3</li>
+<li>3% of data should be 4</li>
+<li>Remaining 2% should be 5</li>
+</ul>
+<p>After some trying and testing, could come up with a function that works this way:</p>
+<pre data-lang="SQL" style="background-color:#212121;color:#eeffff;" class="language-SQL "><code class="language-SQL" data-lang="SQL"><span style="color:#c792ea;">SELECT
+</span><span>    </span><span style="color:#c792ea;">values</span><span>. value
+</span><span style="color:#c792ea;">FROM</span><span> (
+</span><span>    </span><span style="color:#c792ea;">SELECT
+</span><span>    </span><span style="font-style:italic;color:#4a4a4a;">-- 10000 here are parts which represent 100 by extrapolated
+</span><span>        FLOOR(random</span><span style="color:#89ddff;">() </span><span style="font-style:italic;color:#ff5370;">* </span><span style="color:#f78c6c;">10000</span><span>) </span><span style="color:#89ddff;">AS</span><span> random_value
+</span><span>    </span><span style="color:#c792ea;">FROM
+</span><span>    </span><span style="font-style:italic;color:#4a4a4a;">-- Here the end is the number of values needed to generate.
+</span><span>        generate_series(</span><span style="color:#f78c6c;">1</span><span>,</span><span style="color:#f78c6c;">1000000</span><span>) i
+</span><span>    ) x,
+</span><span>    ( </span><span style="color:#c792ea;">VALUES
+</span><span>        (</span><span style="color:#f78c6c;">1</span><span>, </span><span style="color:#f78c6c;">0</span><span>, </span><span style="color:#f78c6c;">7500</span><span>),     (</span><span style="color:#f78c6c;">2</span><span>, </span><span style="color:#f78c6c;">7501</span><span>, </span><span style="color:#f78c6c;">9000</span><span>),  (</span><span style="color:#f78c6c;">3</span><span>, </span><span style="color:#f78c6c;">9001</span><span>, </span><span style="color:#f78c6c;">9500</span><span>),
+</span><span>        (</span><span style="color:#f78c6c;">4</span><span>, </span><span style="color:#f78c6c;">9501</span><span>, </span><span style="color:#f78c6c;">9800</span><span>),  (</span><span style="color:#f78c6c;">5</span><span>, </span><span style="color:#f78c6c;">9801</span><span>, </span><span style="color:#f78c6c;">10000</span><span>)
+</span><span>    ) </span><span style="color:#89ddff;">AS </span><span style="color:#c792ea;">values</span><span> (value, strt, ending)
+</span><span style="color:#c792ea;">WHERE
+</span><span>    x.random_value </span><span style="color:#89ddff;">BETWEEN </span><span style="color:#c792ea;">values</span><span>.strt </span><span style="color:#89ddff;">AND </span><span style="color:#c792ea;">values</span><span>.ending;
+</span></code></pre>
+<p>This works in a way that it generates a random_value and for each such value checks which values.value fits in the range of start and end each weight.
+The start and end are weights but extended from 100 to higher powers for more granular control.</p>
+<p>To test this I performed a test to check the percentage of each value generated and here is the result:</p>
+<table><thead><tr><th>id</th><th>float8</th></tr></thead><tbody>
+<tr><td>1</td><td>0.750275</td></tr>
+<tr><td>2</td><td>0.149736</td></tr>
+<tr><td>3</td><td>0.05017</td></tr>
+<tr><td>4</td><td>0.029985</td></tr>
+<tr><td>5</td><td>0.019834</td></tr>
+</tbody></table>
+<p>Can try it out yourself at <a rel="noopener nofollow noreferrer" target="_blank" href="https://dbfiddle.uk/3yBKJYFz">https://dbfiddle.uk/3yBKJYFz</a>.</p>
+<p>I also found another way of doing this after celebrating my joy of writing this function. It was a <a rel="noopener nofollow noreferrer" target="_blank" href="https://www.depesz.com/2022/11/30/picking-random-element-with-weights/"> blogpost by Depesz</a> which uses a for loop to find random values in the range. Clever.</p>
+<hr />
+<p>Most of the ideas originated while I found some articles/blogs/problems where a dataset was needed to understand and analyze the query better.
+Ig that would be it for this one too.</p>
+<p>Fin.</p>
+</div>
+
+  
+<h2>Comments</h2>
+
+<script src="https://utteranc.es/client.js"
+        repo="rajivharlalka/rajivharlalka.github.io"
+        issue-term="pathname"
+        theme="photon-dark"
+        crossorigin="anonymous"
+        async>
+</script>
+
+
+  
+</article>
+
+        </div>
+
+      
+<footer>
+  <p>
+    <script>
+      document.write(new Date().getFullYear())
+    </script>
+    | 
+    <a href="https://github.com/rajivharlalka">Github</a> 
+    | 
+    <a href="/atom.xml">RSS</a>
+  </p>
+</footer>
+
+    </div>
+    
+<div class="navbar-mobile">
+  <ul class="navbar-nav">
+    
+    <li class="nav-item nav-link">
+       <a href="https:&#x2F;&#x2F;rajivharlalka.in&#x2F;about" class="navbar-item">
+        About Me
+      </a>
+    </li>
+    
+    <li class="nav-item nav-link">
+       <a href="https:&#x2F;&#x2F;rajivharlalka.in&#x2F;categories" class="navbar-item">
+        Categories
+      </a>
+    </li>
+    
+    <li class="nav-item nav-link">
+       <a href="https:&#x2F;&#x2F;notes.rajivharlalka.in" class="navbar-item">
+        Notes
+      </a>
+    </li>
+    
+    <li class="nav-item nav-link">
+       <a href="https:&#x2F;&#x2F;rajivharlalka.in&#x2F;Resume.pdf" class="navbar-item">
+        Resume
+      </a>
+    </li>
+    
+  </ul>
+</div>
+
+  </body>
+
+</html>

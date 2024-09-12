@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta content="IE=edge" http-equiv="X-UA-Compatible" />
+    <meta content="text/html; charset=utf-8" http-equiv="content-type" />
+    <!-- Enable responsiveness on mobile devices-->
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+    
+    <link rel="alternate" type= "application/atom+xml"  title="RSS" href="https://rajivharlalka.in/atom.xml" /> 
+
+    <title>
+      
+    Rajiv - Recursive Macros
+
+    </title>
+
+    <link href="https://rajivharlalka.in/site.css" rel="stylesheet" />
+    
+    <meta content="website" property="og:type"/>
+    <meta content="Rajiv" property="og:site_name"/>
+    <meta content="https://rajivharlalka.in/recursive-macros/" property="og:url"/>
+    <meta content="https://rajivharlalka.in/recursive-macros/" property="twitter:url"/>
+    
+        <meta content="Recursive Macros" property="og:title"/>
+        <meta content="Recursive Macros" property="twitter:title"/>
+    
+    
+        <meta content="Optimizing Vim Macro usage using Recursions" property="description"/>
+        <meta content="Optimizing Vim Macro usage using Recursions" property="og:description"/>
+        <meta content="Optimizing Vim Macro usage using Recursions" property="twitter:description"/>
+    
+    
+        <meta content="summary_large_image" property="twitter:card"/>
+        <meta content="https://rajivharlalka.in/images/cover.png" property="og:image"/>
+        <meta content="https://rajivharlalka.in/images/cover.png" property="twitter:image"/>
+    
+
+    
+    
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="keywords" content="blog,rajivharlalka,website, tech, learning" />
+    <script async defer data-website-id="9b871309-d397-4b82-840a-9ad23c34a546" src="https://um.rajivharlalka.in/umami.js"></script>
+  </head>
+
+  <body>
+    <div class="container">
+
+      
+<header>
+  <nav class="navbar">
+    <div class="navbar-left">
+      <a href="https://rajivharlalka.in" class="navbar-title">
+          Rajiv
+      </a>
+    </div>
+
+
+    <div class="navbar-right">
+      <ul class="navbar-nav">
+        
+        <li class="nav-item nav-link">
+           <a href="https:&#x2F;&#x2F;rajivharlalka.in&#x2F;about" class="navbar-item">
+            About Me
+          </a>
+        </li>
+        
+        <li class="nav-item nav-link">
+           <a href="https:&#x2F;&#x2F;rajivharlalka.in&#x2F;categories" class="navbar-item">
+            Categories
+          </a>
+        </li>
+        
+        <li class="nav-item nav-link">
+           <a href="https:&#x2F;&#x2F;notes.rajivharlalka.in" class="navbar-item">
+            Notes
+          </a>
+        </li>
+        
+        <li class="nav-item nav-link">
+           <a href="https:&#x2F;&#x2F;rajivharlalka.in&#x2F;Resume.pdf" class="navbar-item">
+            Resume
+          </a>
+        </li>
+        
+      </ul>
+    </div>
+  </nav>
+</header>
+
+
+        <div class="content">
+          
+<article class="blog-page">
+  <div class="header">
+    <div class="meta">
+      
+      <div class="date">2023-06-10</div>
+      
+
+      
+      <div class="tags">
+        
+        <a href="https://rajivharlalka.in/categories/tech/" class="tag">
+          tech
+        </a>
+        
+        <a href="https://rajivharlalka.in/categories/vim/" class="tag">
+          vim
+        </a>
+        
+      </div>
+      
+    </div>
+    <div class="title">Recursive Macros</div>
+    <div class="description">Optimizing Vim Macro usage using Recursions</div>
+  </div>
+  <div class="content"><p>We all know about Recursions, right?</p>
+<blockquote>
+<p>Google defines Recursions as: <br/>
+A process or a concept that involves repeating items in a self-similar way.</p>
+</blockquote>
+<p>Recursions is considered a quite complex topic when it comes to programming in C. 
+Even NASA prohibits the use of recursive functions in their code.<a rel="noopener nofollow noreferrer" target="_blank" href="https://craftofcoding.wordpress.com/2021/03/08/why-does-nasa-not-allow-recursion/#:~:text=NASA%20is%20not%20the%20only%20company%20to%20negate,indirectly%20%28i.e.%20recursion%20shall%20not%20be%20allowed%29%20%E2%80%9D.">1</a></p>
+<p>But what if that very recursion can help in code formatting blazingllllly fast.</p>
+<h2 id="abstract">Abstract</h2>
+<p>Since the past few months, I have been trying to adapt myself with the vim (yes ik NeoVim is better) ecosystem. To start with it, I chose not to directly jump with using Nvim but use the VScode Extension Vim , that provides most vim features inside VScode itself. This has helped me learn the bindings better without going through the pain of writing my own NVim dotfiles first. </p>
+<p>Hence I have two workflows at the moment:</p>
+<ol>
+<li>Use Vscode with Vim Extension: When need to do things fast.</li>
+<li>Use NVim with my less understood config: When I can take time writing code and finding better keymaps of doing things faster.</li>
+</ol>
+<h2 id="problem">Problem</h2>
+<p>Recently I was migrating an old Python2 script to Python3, and the main pain came when I needed to convert all <code>print string</code> to <code>print(string)</code>. There were around 120 of such converions.</p>
+<pre data-lang="python" style="background-color:#212121;color:#eeffff;" class="language-python "><code class="language-python" data-lang="python"><span style="font-style:italic;color:#4a4a4a;">#Small snippet of code
+</span><span style="font-style:italic;color:#c792ea;">def </span><span style="color:#82aaff;">load</span><span style="color:#89ddff;">(</span><span style="color:#f78c6c;">self</span><span style="color:#89ddff;">, </span><span style="color:#f78c6c;">program_description</span><span style="color:#89ddff;">):
+</span><span>  proc_id </span><span style="color:#89ddff;">= </span><span style="font-style:italic;color:#ff5370;">self</span><span style="color:#89ddff;">.</span><span style="color:#82aaff;">new_process</span><span style="color:#89ddff;">()
+</span><span>  tmp </span><span style="color:#89ddff;">= </span><span style="color:#82aaff;">program_description</span><span style="color:#89ddff;">.</span><span style="color:#82aaff;">split</span><span style="color:#89ddff;">(&#39;</span><span style="color:#c3e88d;">:</span><span style="color:#89ddff;">&#39;)
+</span><span>  </span><span style="font-style:italic;color:#c792ea;">if </span><span style="color:#82aaff;">len</span><span style="color:#89ddff;">(</span><span style="color:#82aaff;">tmp</span><span style="color:#89ddff;">) != </span><span style="color:#f78c6c;">2</span><span style="color:#89ddff;">:
+</span><span>    </span><span style="color:#c792ea;">print </span><span style="color:#89ddff;">&#39;</span><span style="color:#c3e88d;">Bad description (</span><span>%s</span><span style="color:#c3e88d;">): Must be number &lt;x:y&gt;</span><span style="color:#89ddff;">&#39; % </span><span>program_description
+</span><span>    </span><span style="color:#c792ea;">print </span><span style="color:#89ddff;">&#39;</span><span style="color:#c3e88d;">where X is the number of instructions</span><span style="color:#89ddff;">&#39;
+</span><span>    </span><span style="color:#c792ea;">print </span><span style="color:#89ddff;">&#39;</span><span style="color:#c3e88d;">and Y is the percent change that an instruction is CPU not IO</span><span style="color:#89ddff;">&#39;
+</span><span>    </span><span style="color:#82aaff;">exit</span><span style="color:#89ddff;">(</span><span style="color:#f78c6c;">1</span><span style="color:#89ddff;">)
+</span><span>
+</span></code></pre>
+<p>Macros looked the best way to do this the fastest. So a simple <code>qqqqqwd$i(&lt;Esc&gt;pq</code> macro when the cursor is on the print word.</p>
+<p>Explaining the macro:</p>
+<ul>
+<li><code>qqq</code> - Clear the q register.</li>
+<li><code>qq</code> - start recording macro on q registor</li>
+<li><code>wd$</code> - delete and store everything in line except the (<Enter>` before starting the macro did the work.)print(word) </li>
+<li><code>i(&lt;Esc&gt;</code> - Enter the insert mode, add the opening braces and go back to normal mode.</li>
+<li><code>pq</code> - Paste the content to be inside braces and end recording the macro.</li>
+</ul>
+<p>This macro was ready to be used using <code>@q</code>. </p>
+<h2 id="a-better-solution">A Better solution</h2>
+<p>What suddenly popped into my mind was if I used the macro to even call itself. A simple append change in the macro and making it
+<code>qqqqqwd$i(&lt;Esc&gt;pn@qq</code> and triggering a search using <code>/print</code> before starting the macro.</p>
+<p>What the extra <code>n@q</code> does is automatically move to the next find of the <em>print</em> keyword and start the macro again. </p>
+<p>But here starts the doom. With having a basic idea of how search using / works in vim, it is understandable that this would not stop ever. </p>
+<p>Once the cursor reaches the end of last <em>print</em> in the file, it starts to find the keyword again from the start of file and will execute the macro again on the already formatted lines. This can lead to variety of abnormalities depending how you file was structured.</p>
+<h2 id="solution-to-problem">Solution to Problem</h2>
+<p>So a basic intution is to see how to stop the macro from running once it reaches end of file. </p>
+<p>Another point to be noted is macros stop running if any command in the macro fails. So we need to redesign the macro such that it detects end of file. Have not yet found a very brilliant solution to this yet, would update when have one.</p>
+<p>Was referred to a solution of using this vim command <code>:g/print/normal f'i(^[f'a)</code> where <code>^[</code> is Escape character on <a rel="noopener nofollow noreferrer" target="_blank" href="https://www.reddit.com/r/vim/comments/1464f34/help_with_writing_a_macro/?utm_source=share&amp;utm_medium=web2x&amp;context=3">reddit</a> but this doesn't solve the issue completly too. </p>
+<h2 id="exceptions">Exceptions</h2>
+<p>I too ended up in few exceptional cases which I had to fix manually in the end. Some of them were,</p>
+<ul>
+<li>Lines ending with a <code>,</code> . This made it terrible as some lines had <code>,</code> in the middle too and splitting only from the end was pain.</li>
+<li>Strings having <code>print</code> too. This was the most frustrating exception. The line string truncated again from the middle and threw things haphazard. Though a solution of this could have been made by always moving to next line and then to the first word, but yes I got lazy. </li>
+</ul>
+<p>Would like to know if anyone has any solution to this problem. :)</p>
+<p>Fin.</p>
+<hr />
+</div>
+
+  
+<h2>Comments</h2>
+
+<script src="https://utteranc.es/client.js"
+        repo="rajivharlalka/rajivharlalka.github.io"
+        issue-term="pathname"
+        theme="photon-dark"
+        crossorigin="anonymous"
+        async>
+</script>
+
+
+  
+</article>
+
+        </div>
+
+      
+<footer>
+  <p>
+    <script>
+      document.write(new Date().getFullYear())
+    </script>
+    | 
+    <a href="https://github.com/rajivharlalka">Github</a> 
+    | 
+    <a href="/atom.xml">RSS</a>
+  </p>
+</footer>
+
+    </div>
+    
+<div class="navbar-mobile">
+  <ul class="navbar-nav">
+    
+    <li class="nav-item nav-link">
+       <a href="https:&#x2F;&#x2F;rajivharlalka.in&#x2F;about" class="navbar-item">
+        About Me
+      </a>
+    </li>
+    
+    <li class="nav-item nav-link">
+       <a href="https:&#x2F;&#x2F;rajivharlalka.in&#x2F;categories" class="navbar-item">
+        Categories
+      </a>
+    </li>
+    
+    <li class="nav-item nav-link">
+       <a href="https:&#x2F;&#x2F;notes.rajivharlalka.in" class="navbar-item">
+        Notes
+      </a>
+    </li>
+    
+    <li class="nav-item nav-link">
+       <a href="https:&#x2F;&#x2F;rajivharlalka.in&#x2F;Resume.pdf" class="navbar-item">
+        Resume
+      </a>
+    </li>
+    
+  </ul>
+</div>
+
+  </body>
+
+</html>
