@@ -25,3 +25,8 @@
     --theme-quote: 102deg 100% 86%;
   }
 }
+
+img + em {
+  display: block;
+  text-align: center;
+}

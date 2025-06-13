@@ -152,7 +152,7 @@ export default defineConfig({
     },
     plugins: [rawFonts(['.ttf', '.woff'])],
   },
-  redirects: redirects
+  redirects: redirects,
 })
 
 function rawFonts(ext: string[]) {
