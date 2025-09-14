@@ -1,0 +1,16 @@
+---
+import type { SiteMeta } from '@/types'
+import BaseLayout from './Base.astro'
+
+interface Props {
+  meta: SiteMeta
+}
+
+const { meta } = Astro.props
+---
+
+<BaseLayout meta={meta}>
+  <div class="prose prose-cactus prose-headings:font-semibold prose-headings:text-accent-2 prose-headings:before:absolute prose-headings:before:-ms-4 prose-headings:before:text-accent">
+    <slot />
+  </div>
+</BaseLayout>
