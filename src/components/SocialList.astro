@@ -15,7 +15,7 @@ const socialLinks: {
   {
     friendlyName: 'Github',
     link: 'https://github.com/rajivharlalka',
-    name: 'mdi:github',
+    name: 'mdi:github' 
   },
   {
     friendlyName: 'Linkedin',
@@ -30,9 +30,9 @@ const socialLinks: {
 ]
 ---
 
-<div class="flex flex-wrap items-end gap-x-2">
+<div class="flex flex-wrap items-end gap-x-2 ">
   <p>Find me on</p>
-  <ul class="flex flex-1 items-center gap-x-2 sm:flex-initial">
+  <ul class="flex flex-1 items-center gap-x-2 mb-auto mt-auto sm:flex-initial">
     {
       socialLinks.map(({ friendlyName, isWebmention, link, name }) => (
         <li class="flex">
