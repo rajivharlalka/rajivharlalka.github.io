@@ -15,11 +15,11 @@
     "check": "astro check"
   },
   "dependencies": {
-    "@astrojs/mdx": "3.1.5",
-    "@astrojs/rss": "4.0.7",
-    "@astrojs/sitemap": "3.1.6",
-    "@astrojs/tailwind": "5.1.0",
-    "astro": "4.15.4",
+    "@astrojs/mdx": "4.3.13",
+    "@astrojs/rss": "4.0.14",
+    "@astrojs/sitemap": "3.6.0",
+    "@astrojs/tailwind": "6.0.2",
+    "astro": "5.16.6",
     "astro-expressive-code": "^0.35.6",
     "astro-icon": "^1.1.5",
     "cssnano": "^7.1.1",
@@ -36,7 +36,7 @@
     "unist-util-visit": "^5.0.0"
   },
   "devDependencies": {
-    "@astrojs/check": "^0.9.4",
+    "@astrojs/check": "^0.9.6",
     "@biomejs/biome": "^1.9.4",
     "@iconify-json/mdi": "^1.2.3",
     "@pagefind/default-ui": "^1.4.0",
@@ -46,6 +46,7 @@
     "@types/hast": "^3.0.4",
     "@types/mdast": "^4.0.4",
     "autoprefixer": "^10.4.21",
+    "baseline-browser-mapping": "^2.9.11",
     "pagefind": "^1.4.0",
     "prettier": "^3.6.2",
     "prettier-plugin-astro": "0.14.1",

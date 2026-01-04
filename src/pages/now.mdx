@@ -2,38 +2,40 @@
 description: "What I'm doing now - current projects, interests, and activities"
 title: 'Now'
 ---
+
 import PageLayout from '@/layouts/MDXLayout.astro'
 
 export const meta = {
   title: frontmatter.title,
-  description: frontmatter.description
+  description: frontmatter.description,
 }
 
 <PageLayout meta={meta}>
       
   ### What am I Learning
-  Reading whitepapers on internals of database, concurrency control, sync-engines and dist-sys. 
+  Reading whitepapers on internals of database, concurrency control, sync-engines and dist-sys.
 
-  Making small sandbox implementations of what I feel is complicated.
+Making small sandbox implementations of what I feel is complicated.
 
-  ### What am I Reading
+### What am I Reading
 
-  Books related to finance, buisness and fiction.
+1. The Mystery of Four by Sam Blake
+2. Never Eat Alone by Keith Ferrazi
+3. The Art of Strategy by Avinash Dixit
 
-  ### Where am I Working
+### Where am I Working
 
-  To be Updated
+Meta, London
 
-  ### Next place I wish to Travelling
+### Next place I wish to Travelling
 
-  Switzerland
+Switzerland
 
-
-      
       <div class="mt-8 pt-4 border-t border-gray-200 text-sm text-gray-600">
         <p>
-          This page is inspired by the <a href="https://nownownow.com/about" target="_blank" rel="noopener noreferrer" class="underline">now movement</a>, 
+          This page is inspired by the <a href="https://nownownow.com/about" target="_blank" rel="noopener noreferrer" class="underline">now movement</a>,
           started by Derek Sivers. It's a way to share what I'm focused on right now.
         </p>
       </div>
+
 </PageLayout>
