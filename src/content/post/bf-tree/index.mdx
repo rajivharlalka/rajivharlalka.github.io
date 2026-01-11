@@ -1,0 +1,70 @@
+---
+title: 'Paper Review : Bf-Trees'
+description: 'BF-Tree are a modern read-write optimized larger-than-memory range index that performs better than b-tree/lsm-tree in most scenarios'
+publishDate: '11 January 2026'
+draft: false
+tags: ['database', 'paper', 'tech', 'indexing']
+---
+
+Recently I read the paper on [BF-Trees](https://vldb.org/pvldb/vol17/p3442-hao.pdf) which are a modern read write optimized concurrent larger-than-memory range index. If seen through the different parts of what a storage enginer performs or has characteristics in, this seems to be excel b-tree and lsm tree in all aspects, which are proved through the benchmarks in the paper. Bf-Tree claims to be 2.5x faster than [RocksDB](https://en.wikipedia.org/wiki/RocksDB) for scans, 6x faster than B-Tree for writes and 2x better than both for point lookups.  
+The major breakthrough of the paper is de-coupling the size of cache pages to on-disk pages. This enables the engine to cache the page at a granular level optimizing for more hot-records and less read-write amplification.
+
+## Dissection of the Title
+
+### Why Modern
+
+The paper being published in [2024](https://www.semanticscholar.org/paper/Bf-Tree%3A-A-Modern-Read-Write-Optimized-Concurrent-Hao-Chandramouli/f5be98b97f0be196b65e7fac688622fd9b5dd06a), uses modern hardware performance benefits to optimize for the read and write operations.
+The index is optimized for SSD where random I/O operations are as efficient as sequential I/O operations.
+The paper leverages additional hardware capability such as [io_uring](https://en.wikipedia.org/wiki/Io_uring) to bypass kernel-io which futher amplifies the performance of the engine.
+
+### Read-Write Optimized
+
+Most variants of the engines around b-tree or lsm tree, eg: [bw-tree](https://15721.courses.cs.cmu.edu/spring2016/papers/bwtree-icde2013.pdf) or [bε-tree](https://blocksandfiles.com/2022/06/29/b%CE%B5-tree-b-epsilon-tree-beta-epsilon-tree/), tend to aim for optimization for either the read or write.
+bw-tree  and bε-tree uses delta record caching reducing write amplification and a few variants for lsm-tree perform compaction in a smart way to reduce read amplification.
+De-coupling cache pages from on-disk pages helps to get a performance gain on both read and write for Bf-tree. It chooses a page size of 4Kb on disk, and a variable sized cache-page enabling only the hot records to be cached.
+
+### Larger than memory
+
+This is quite obvious as being a [storage engine](https://en.wikipedia.org/wiki/Database_engine), the index enables to query data that is larger than available memory with a performance of something between purely in-memory and purely on-disk.
+
+### Range index
+
+This again might look quite obvious as B-trees are known to be better than lsm-trees when it comes to range queries, and Bf-tree being a variant of B-tree should enable range query ootb. This is not the case.
+B-tree benefits of caching in range queries since the entire page is cached. If a query requires joining of three consecutive leaf pages, and all of them are cached, the engine can directly perform a search on the in-memory cache and return the results.
+On the other hand, Bf-tree caching on hot-records of specific pages doesn't benefit from this directly unless it has the entire pages cached. When this is the scenario, a Bf-tree works identical to a B-tree.
+I would be quite interested to see a benchmark when the queries are range-query heavy along with sporiadic point-lookups.
+
+## Architecture
+
+In the entire architecture of Bf-tree, I found the following three components and tweaks quite interesting.
+
+### Mini-page
+
+The mini-page is the actual page that gets cached in memory. It is a subset of the actual on-disk page and contains the hot-records. There is a record count bit in the metadata for each page, which tracks how many time this bit has been accessed. This becomes the determining factor for eviction of the cold records from a page.
+
+The page stores the records using the [slotted-pages](https://siemens.blog/posts/database-page-layout/) layout, similar to most engines. The design of mini-page and on-disk page is same, and a bit flag differentiates the type of page it is. Hence the only differentiating factor a leaf page and mini-page is that mini-pages can be variable lengths.
+
+### Circular Buffer Pool
+
+Bf-tree uses a cicular buffer pool to manage memory. it starts adding pages to the pool from the tail unless the buffer is full, once it is full, it starts evicting pages from the head.
+
+The entire pool is broken into two regions: in-place-update and copy-on-access. There is a second-chance address in the memory buffer that differentiates the two. The region between head and second-chance addr is the copy-on-access region and other is the in-place update. If a write happens to a page in a copy-on-access region, the page is copied over to the in-place update. Since the evictions happen from the head(copy-on-access region), the hot records are always in the in-place update region. This ensures that hot records are never evicted and cold records are regularly pruned.
+
+### Optimizations
+
+There have been multiple optimziations on both mini-page and circular buffer, the following are some of the one which I liked a lot.
+
+1. Prefix Compression: The leaf and mini-page layout have a field in their metadata: the prefix of the keys stored in the page. This can definitely save on a lot of space in-memory and on disk.
+2. Look-ahead bytes: For every value, the metadata of the pages stores the first two bits, after the prefix, which helps the engine to search for a string faster. For pages which are on-disk, the actual records need not be fetched from the disk if the look ahead bytes do not match, ensuring the search terminates early and unnecessary records are not fetched.
+
+---
+
+The paper presents a great opportunity for more optimizations on the performance of B-tree and as the hardware gets better overtime, these fine-tunings would definitely help in improving read and write througputs. I would be waiting to see any database use this database in production systems and how it turns out.
+
+The following repo from one of the authors has some really good animations that help to understand the mechanism better. [link](https://github.com/XiangpengHao/bf-tree-docs)
+
+Here is my toy implementation of the ring buffer to understand some stuff better. [Link](https://github.com/rajivharlalka/bf-tree_sandbox).
+
+P.S. - AI was used in the above implementation. :)
+
+Fin.
