@@ -26,7 +26,7 @@ jobs:
           WEBMENTION_API_KEY: ${{ secrets.WEBMENTION_API_KEY }}
         with:
           path: . # The root location of your Astro project inside the repository. (optional)
-          node-version: 18 # The specific version of Node that should be used to build your site. Defaults to 18. (optional)
+          node-version: 22 # pnpm@latest requires Node >=22.13
           package-manager: pnpm@latest # The Node package manager that should be used to install dependencies and build your site. Automatically detected based on your lockfile. (optional)
       # - name: Cache Build Files
       #   uses: actions/cache@v3
