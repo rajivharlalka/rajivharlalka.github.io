@@ -1,5 +1,4 @@
 import type { Config } from 'tailwindcss'
-import { fontFamily } from 'tailwindcss/defaultTheme'
 import plugin from 'tailwindcss/plugin'
 
 export default {
@@ -48,9 +47,27 @@ export default {
         textColor: 'hsl(var(--theme-text) / <alpha-value>)',
       },
       fontFamily: {
-        // Add any custom fonts here
-        sans: [...fontFamily.sans],
-        serif: [...fontFamily.serif],
+        sans: [
+          '"Open Sans"',
+          'system-ui',
+          '-apple-system',
+          'Segoe UI',
+          'Roboto',
+          'Helvetica Neue',
+          'Arial',
+          'sans-serif',
+        ],
+        serif: ['"EB Garamond"', 'Georgia', 'Cambria', '"Times New Roman"', 'Times', 'serif'],
+        mono: [
+          '"JetBrains Mono"',
+          'Fira Code',
+          'ui-monospace',
+          'SFMono-Regular',
+          'Menlo',
+          'Monaco',
+          'Consolas',
+          'monospace',
+        ],
       },
       transitionProperty: {
         height: 'height',
@@ -76,6 +93,10 @@ export default {
             },
             strong: {
               fontWeight: '700',
+            },
+            'h1, h2, h3, h4, h5, h6': {
+              fontFamily: theme('fontFamily.sans').join(', '),
+              fontWeight: '300',
             },
             sup: {
               '@apply ms-0.5': '',
@@ -185,6 +206,10 @@ export default {
             '--tw-prose-links': theme('colors.textColor / 1'),
             '--tw-prose-quotes': theme('colors.quote / 1'),
             '--tw-prose-th-borders': '#666',
+            'h1, h2, h3, h4, h5, h6': {
+              fontFamily: theme('fontFamily.sans').join(', '),
+              fontWeight: '300',
+            },
           },
         },
         sm: {

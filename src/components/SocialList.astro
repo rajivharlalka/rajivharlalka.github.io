@@ -36,7 +36,7 @@ const socialLinks: {
       socialLinks.map(({ friendlyName, isWebmention, link, name }) => (
         <li class="flex">
           <a
-            class="inline-block sm:hover:text-link"
+            class="inline-block text-textColor/60 transition-colors hover:text-textColor"
             href={link}
             rel={`noreferrer ${isWebmention ? 'me authn' : ''}`}
             target="_blank"

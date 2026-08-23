@@ -4,6 +4,7 @@ import type { CollectionEntry } from "astro:content";
 import Masthead from "@/components/blog/Masthead.astro";
 import TOC from "@/components/blog/TOC.astro";
 import WebMentions from "@/components/blog/webmentions/index.astro";
+import { siteConfig } from "@/site-config";
 
 import BaseLayout from "./Base.astro";
 
@@ -13,21 +14,35 @@ interface Props {
 
 const { post } = Astro.props;
 const {
-	data: { description, ogImage, publishDate, title, updatedDate },
+	data: { description, ogImage, publishDate, tags, title, updatedDate },
 	slug,
 } = post;
 const socialImage = ogImage ?? `/og-image/${slug}.png`;
 const articleDate = updatedDate?.toISOString() ?? publishDate.toISOString();
 const { headings } = await post.render();
+const postURL = new URL(`/posts/${slug}/`, Astro.site).href;
+const blogPostingSchema = {
+	"@context": "https://schema.org",
+	"@type": "BlogPosting",
+	headline: title,
+	description,
+	url: postURL,
+	mainEntityOfPage: postURL,
+	image: new URL(socialImage, Astro.site).href,
+	datePublished: publishDate.toISOString(),
+	dateModified: (updatedDate ?? publishDate).toISOString(),
+	author: { "@type": "Person", name: siteConfig.author },
+	keywords: tags.join(", "),
+};
 ---
 
-<BaseLayout meta={{ articleDate, description, ogImage: socialImage, title }}>
+<BaseLayout meta={{ articleDate, description, ogImage: socialImage, title }} schema={blogPostingSchema}>
 	<div class="gap-x-10 lg:flex lg:items-start">
 		{!!headings.length && <TOC headings={headings} />}
 		<article class="flex-grow break-words" data-pagefind-body>
 			<div id="blog-hero"><Masthead content={post} /></div>
 			<div
-				class="prose prose-cactus mt-12 prose-headings:font-semibold prose-headings:text-accent-2 prose-headings:before:absolute prose-headings:before:-ms-4 prose-headings:before:text-accent sm:prose-headings:before:content-['#'] sm:prose-th:before:content-none"
+				class="prose prose-cactus mt-10 max-w-none prose-headings:font-sans prose-headings:font-light prose-headings:tracking-tight prose-headings:text-accent-2 prose-headings:before:absolute prose-headings:before:-ms-4 prose-headings:before:text-accent/50 sm:prose-headings:before:content-['#'] sm:prose-th:before:content-none"
 			>
 				<slot />
 				<WebMentions />

@@ -9,24 +9,22 @@ import type { SiteMeta } from '@/types'
 
 interface Props {
   meta: SiteMeta
+  schema?: Record<string, unknown>
 }
 
 const {
-  meta: {
-    articleDate,
-    description = siteConfig.description,
-    ogImage,
-    title
-  },
+  meta: { articleDate, description = siteConfig.description, ogImage, title },
+  schema,
 } = Astro.props
 ---
 
 <html class="scroll-smooth" lang={siteConfig.lang}>
   <head>
     <BaseHead articleDate={articleDate} description={description} ogImage={ogImage} title={title} />
+    {schema && <script is:inline set:html={JSON.stringify(schema)} type="application/ld+json" />}
   </head>
   <body
-    class="mx-auto flex min-h-screen max-w-4xl flex-col bg-bgColor px-4 pt-16 font-mono text-sm font-normal text-textColor antialiased sm:px-8"
+    class="mx-auto flex min-h-screen max-w-3xl flex-col bg-bgColor px-6 pt-20 font-serif text-base leading-relaxed text-textColor antialiased sm:px-10"
   >
     <ThemeProvider />
     <SkipLink />

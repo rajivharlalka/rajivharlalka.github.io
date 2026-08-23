@@ -10,16 +10,26 @@ const allPostsByDate = sortMDByDate(allPosts).slice(0, MAX_POSTS)
 ---
 
 <PageLayout meta={{ title: 'Home' }}>
-  <section>
-    <h1 class="title">👋 Hello!</h1>
-    <p class="mb-4">
-      Nature Explorer. Software Fixer. Sports Enthusiast. Wannabe Writer. Tinkerer. 
+  <section class="space-y-4">
+    <h1 class="font-sans text-3xl font-light tracking-tight text-accent-2 sm:text-4xl">
+      👋 Hello! I'm Rajiv Harlalka
+    </h1>
+    <p class="text-lg leading-relaxed text-textColor/80">
+      Nature Explorer. Software Fixer. Sports Enthusiast. Wannabe Writer. Tinkerer.
+    </p>
+    <p class="leading-relaxed text-textColor/80">
+      This is my personal space on the internet — a blog about software engineering
+      (databases, PostgreSQL, web), open source, and occasional essays on life, books, and
+      everything in between.
     </p>
 
     <SocialList />
   </section>
   <section aria-label="Blog post list" class="mt-8">
-    <h2 class="title mb-4 text-xl">Posts</h2>
+    <div class="mb-6 flex items-center gap-3">
+      <h2 class="font-sans text-xl font-light tracking-tight text-accent-2">Posts</h2>
+      <span class="h-px flex-1 bg-textColor/10"></span>
+    </div>
     <ul class="space-y-4">
       {
         allPostsByDate.map((p) => (

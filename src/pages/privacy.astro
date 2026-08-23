@@ -1,0 +1,47 @@
+---
+import PageLayout from '@/layouts/Base.astro'
+
+const meta = {
+  description:
+    'Privacy policy for rajivharlalka.in: no analytics, no ads, no tracking cookies. What little data exists and why.',
+  title: 'Privacy Policy',
+}
+---
+
+<PageLayout meta={meta}>
+  <div class="prose prose-cactus max-w-none">
+    <h1 class="title">Privacy Policy</h1>
+    <p>
+      This site collects as little data as possible. There are no analytics scripts, no
+      advertising, no third-party trackers, and no tracking cookies of any kind.
+    </p>
+    <h2 id="what-is-stored">What is stored</h2>
+    <ul>
+      <li>
+        <strong>Theme preference.</strong> Your light/dark theme choice is saved in your
+        browser's local storage on your own device. It never leaves your browser.
+      </li>
+      <li>
+        <strong>Server logs.</strong> The site is hosted on GitHub Pages. GitHub may keep
+        standard request logs (IP address, user agent, requested URL) for security and
+        operational purposes, governed by GitHub's own privacy policy.
+      </li>
+      <li>
+        <strong>Webmentions.</strong> If you publicly link to a post, interactions collected
+        via webmention.io (likes, replies, reposts) may be displayed alongside that post. Only
+        publicly available information is shown.
+      </li>
+    </ul>
+    <h2 id="your-data">Your data</h2>
+    <p>
+      Since there is no account system, newsletter, or comment database, there is no personal
+      data of yours held by this site to access, export, or delete. If you appear in a
+      webmention display and would like it removed, contact me and I will hide it.
+    </p>
+    <h2 id="contact">Contact</h2>
+    <p>
+      Questions about this policy? Reach me through any channel listed on the
+      <a href="/contact/">contact page</a>.
+    </p>
+  </div>
+</PageLayout>

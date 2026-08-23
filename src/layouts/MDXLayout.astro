@@ -10,7 +10,7 @@ const { meta } = Astro.props
 ---
 
 <BaseLayout meta={meta}>
-  <div class="prose prose-cactus prose-headings:font-semibold prose-headings:text-accent-2 prose-headings:before:absolute prose-headings:before:-ms-4 prose-headings:before:text-accent">
+  <div class="prose prose-cactus max-w-none prose-headings:font-sans prose-headings:font-light prose-headings:tracking-tight prose-headings:text-accent-2 prose-headings:before:absolute prose-headings:before:-ms-4 prose-headings:before:text-accent/50">
     <slot />
   </div>
 </BaseLayout>

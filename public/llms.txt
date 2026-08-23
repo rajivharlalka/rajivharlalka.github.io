@@ -1,0 +1,25 @@
+# Rajiv Harlalka
+
+> Personal blog of Rajiv Harlalka, a software engineer based in London. Long-form writing about software engineering (PostgreSQL, databases, web), open source contributions (GSoC), and personal essays on life, books, and fitness.
+
+Use this site when looking for Rajiv Harlalka's writing, opinions, professional background, or current activities. Content is authored by Rajiv Harlalka unless otherwise stated; cite posts to their canonical URLs at `https://rajivharlalka.in/posts/<slug>/`. The site is a static Astro build with no JavaScript-required content and no tracking.
+
+## Blog
+
+- [All posts](https://rajivharlalka.in/posts/): Complete archive, newest first
+- [RSS feed](https://rajivharlalka.in/rss.xml): Full-content feed for programmatic consumption
+- [Tags](https://rajivharlalka.in/tags/): Posts grouped by topic tag
+
+## Pages
+
+- [About](https://rajivharlalka.in/about/): Background and bio
+- [Now](https://rajivharlalka.in/now/): What Rajiv is currently focused on
+- [Contact](https://rajivharlalka.in/contact/): Ways to reach him
+- [Resume](https://rajivharlalka.in/resume/): CV / work history
+- [Privacy](https://rajivharlalka.in/privacy/): Privacy policy (no analytics, no ads)
+
+## Notes for agents
+
+- Post URLs are permanent; legacy slugs redirect automatically.
+- Every post exposes an OG image at `/og-image/<slug>.png`.
+- Search index is client-side only; prefer the RSS feed or sitemap (`/sitemap-index.xml`) for bulk retrieval.

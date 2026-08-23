@@ -6,24 +6,27 @@
   :root,
   :root[data-theme='light'] {
     color-scheme: light;
-    /* https://tailwindcss.com/docs/customizing-colors#using-css-variables */
-    --theme-bg: 240deg 4% 95%;
+    --theme-bg: 36deg 33% 97%;
     --theme-link: 172deg 18% 41%;
-    --theme-text: 203deg 11% 15%;
+    --theme-text: 210deg 16% 14%;
     --theme-accent: 351deg 66% 48%;
-    --theme-accent-2: 0deg 0% 7%;
+    --theme-accent-2: 210deg 14% 10%;
     --theme-quote: 351deg 66% 48%;
   }
 
   :root[data-theme='dark'] {
     color-scheme: dark;
-    --theme-bg: 210deg 6% 12%;
+    --theme-bg: 220deg 18% 10%;
     --theme-link: 330deg 49% 67%;
-    --theme-text: 220deg 3% 79%;
+    --theme-text: 210deg 8% 82%;
     --theme-accent: 159deg 64% 45%;
-    --theme-accent-2: 0deg 0% 93%;
+    --theme-accent-2: 0deg 0% 95%;
     --theme-quote: 102deg 100% 86%;
   }
+}
+
+::selection {
+  background-color: hsl(var(--theme-accent) / 0.2);
 }
 
 img + em {

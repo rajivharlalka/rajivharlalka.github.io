@@ -2,13 +2,37 @@
 import PageLayout from '@/layouts/Base.astro'
 
 const meta = {
-  description: 'Oops! It looks like this page is lost in space!',
+  description: 'Page not found. Find your way back to the blog, posts archive, and other pages.',
   title: 'Oops! You found a missing page!',
 }
+
+const recoveryLinks = [
+  { href: '/', text: 'Home' },
+  { href: '/posts/', text: 'All posts' },
+  { href: '/tags/', text: 'Tags' },
+  { href: '/about/', text: 'About' },
+  { href: '/contact/', text: 'Contact' },
+]
 ---
 
 <PageLayout meta={meta}>
   <h1 class="title mb-6">404 | Oops something went wrong</h1>
-  <p class="mb-8">Please use the navigation to find your way back</p>
-  <div class="my-4 grid justify-center"></div>
+  <p class="mb-8">
+    This page does not exist (or was moved). Here are some places you can go instead:
+  </p>
+  <ul class="mb-8 list-inside list-disc space-y-1">
+    {
+      recoveryLinks.map((link) => (
+        <li>
+          <a class="cactus-link" href={link.href}>
+            {link.text}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+  <p class="text-textColor/60">
+    For machines: an <a class="cactus-link" href="/sitemap-index.xml">XML sitemap</a> and a
+    <a class="cactus-link" href="/llms.txt">site guide for AI agents</a> are available.
+  </p>
 </PageLayout>
